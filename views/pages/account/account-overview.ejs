@@ -1,13 +1,113 @@
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="css/nucleo-icons.css" rel="stylesheet" />
+    <link href="css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 <div id="account-overview" v-cloak>
+
+  <div class="container-fluid px-2 px-md-4">
+    <div
+      class="page-header min-height-300 border-radius-xl mt-4"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+      "
+    >
+      <span class="mask bg-gradient-primary opacity-6"></span>
+    </div>
+    <div class="card card-body mx-3 mx-md-4 mt-n6">
+      <div class="row gx-4 mb-2">
+        <div class="col-auto">
+          <div class="avatar avatar-xl position-relative">
+            <img
+              src="./audiobaze.png"
+              alt="profile_image"
+              class="w-100 border-radius-lg shadow-sm"
+            />
+          </div>
+        </div>
+        <div class="col-auto my-auto">
+          <div class="h-100">
+            <h5 class="mb-1">{{ me.fullName }}</h5>
+            <% if(me.isSuperAdmin === true) {%>
+              <p class="mb-0 font-weight-normal text-sm">Audiobaze Spotify Bot Admin</p>
+            <% } else {%>
+              <p class="mb-0 font-weight-normal text-sm">Audiobaze Spotify Bot User</p>
+            <% } %> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-12 col-xl-4">
+            <div class="card card-plain h-100">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-md-8 d-flex align-items-center">
+                    <h6 class="mb-0">Profile Information</h6>
+                  </div>
+                  <div class="col-md-4 text-end">
+                    <a href="javascript:;">
+                      <i
+                        class="fas fa-user-edit text-secondary text-sm"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Edit Profile"
+                      ></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <ul class="list-group">
+                  <!-- <li class="list-group-item border-0 ps-0 text-sm">
+                    <strong class="text-dark">Mobile:</strong> &nbsp; (44) 123
+                    1234 123
+                  </li> -->
+                  <li class="list-group-item border-0 ps-0 text-sm">
+                    <strong class="text-dark">Full Name:</strong> &nbsp;
+                    {{me.fullName}}
+                  </li>
+                  <li class="list-group-item border-0 ps-0 text-sm">
+                    <strong class="text-dark">Email:</strong> &nbsp;
+                    <strong
+                    :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']"
+                    >{{
+                      me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress
+                    }}</strong
+                  >
+                  <span
+                    v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'"
+                    class="badge badge-pill badge-warning"
+                    >Unverified</span
+                  >
+                  </li>
+                  <li class="list-group-item border-0 ps-0 text-sm">
+                    <strong class="text-dark">Password:</strong> &nbsp;
+                    <strong>••••••••••</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <account-notification-banner></account-notification-banner>
-  <div class="container pt-5 pb-5">
+  <!-- <div class="container pt-5 pb-5">
     <h1>My account</h1>
-    <hr/>
+    <hr />
     <div class="row mb-3">
       <div class="col-sm-6">
         <h4>Personal information</h4>
       </div>
-      <div class="col-sm-6">
+      <!-- <div class="col-sm-6">
         <span class="float-sm-right">
           <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/account/profile">Edit profile</a>
         </span>
@@ -15,16 +115,27 @@
     </div>
     <div class="row">
       <div class="col-3">Name:</div>
-      <div class="col"><strong>{{me.fullName}}</strong></div>
+      <div class="col">
+        <strong>{{ me.fullName }}</strong>
+      </div>
     </div>
     <div class="row">
       <div class="col-3">Email:</div>
       <div class="col">
-        <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
-        <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+        <strong
+          :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']"
+          >{{
+            me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress
+          }}</strong
+        >
+        <span
+          v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'"
+          class="badge badge-pill badge-warning"
+          >Unverified</span
+        >
       </div>
     </div>
-    <hr/>
+    <hr />
     <div class="row mb-3">
       <div class="col-sm-6">
         <h4>Password</h4>
@@ -39,71 +150,143 @@
       <div class="col-3">Password:</div>
       <div class="col"><strong>••••••••••</strong></div>
     </div>
-    <hr/>
+    <hr />
     <div class="row mb-3" v-if="isBillingEnabled">
       <div class="col-sm-6">
         <h4>Billing</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <button style="width: 150px;" class="btn btn-sm btn-outline-info" @click="clickUpdateBillingCardButton()">{{ me.hasBillingCard ? 'Change card' : '+ Add card' }}</button>
+          <button
+            style="width: 150px"
+            class="btn btn-sm btn-outline-info"
+            @click="clickUpdateBillingCardButton()"
+          >
+            {{ me.hasBillingCard ? "Change card" : "+ Add card" }}
+          </button>
         </span>
       </div>
     </div>
     <div v-if="isBillingEnabled && me.hasBillingCard">
       <div class="row">
         <div class="col-3">Credit card:</div>
-        <div class="col">{{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong> <a style="text-decoration: underline; cursor: pointer;" class="ml-2" purpose="remove-button" @click="clickRemoveCardButton()">Remove</a></div>
+        <div class="col">
+          {{ me.billingCardBrand }} ending in
+          <strong>{{ me.billingCardLast4 }}</strong>
+          <a
+            style="text-decoration: underline; cursor: pointer"
+            class="ml-2"
+            purpose="remove-button"
+            @click="clickRemoveCardButton()"
+            >Remove</a
+          >
+        </div>
       </div>
       <div class="row">
         <div class="col-3">Expiration:</div>
-        <div class="col">{{me.billingCardExpMonth}}/{{me.billingCardExpYear}}</div>
+        <div class="col">
+          {{ me.billingCardExpMonth }}/{{ me.billingCardExpYear }}
+        </div>
       </div>
     </div>
     <div class="alert alert-danger" v-else-if="isBillingEnabled && cloudError">
-      There was an error updating your credit card information. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.
+      There was an error updating your credit card information. Please check
+      your information and try again, or
+      <a href="/contact">contact support</a> if the error persists.
     </div>
     <div class="alert alert-secondary" v-else-if="isBillingEnabled">
-      You have not linked a payment source to your account. In order to access paid features, you'll need to provide your credit card information. (Don't worry: you will only be charged when you've reached the limit of your free plan.)
+      You have not linked a payment source to your account. In order to access
+      paid features, you'll need to provide your credit card information. (Don't
+      worry: you will only be charged when you've reached the limit of your free
+      plan.)
     </div>
-  </div>
+  </div> -->
 
   <% /* Modify Card Info Modal */ %>
-  <modal v-if="modal === 'update-billing-card'" @close="closeModal()" v-cloak>
+  <!-- <modal v-if="modal === 'update-billing-card'" @close="closeModal()" v-cloak>
     <div class="modal-header">
-      <h2 class="modal-title">{{me.hasBillingCard? 'Edit' : 'Add' }} card</h2>
+      <h2 class="modal-title">{{ me.hasBillingCard ? "Edit" : "Add" }} card</h2>
     </div>
-    <ajax-form :handle-submitting="handleSubmittingUpdateBillingCard" :syncing.sync="syncing" :cloud-error.sync="cloudError" :form-data="formData" :form-rules="formRules" :form-errors.sync="formErrors" @submitted="submittedUpdateBillingCard()">
+    <ajax-form
+      :handle-submitting="handleSubmittingUpdateBillingCard"
+      :syncing.sync="syncing"
+      :cloud-error.sync="cloudError"
+      :form-data="formData"
+      :form-rules="formRules"
+      :form-errors.sync="formErrors"
+      @submitted="submittedUpdateBillingCard()"
+    >
       <div class="modal-body">
         <div class="form-group">
           <label>Credit card</label>
-          <stripe-card-element :stripe-publishable-key="stripePublishableKey" :is-errored.sync="formErrors.newPaymentSource" v-model="formData.newPaymentSource" key="billing-card" ref="billingcardref"></stripe-card-element>
+          <stripe-card-element
+            :stripe-publishable-key="stripePublishableKey"
+            :is-errored.sync="formErrors.newPaymentSource"
+            v-model="formData.newPaymentSource"
+            key="billing-card"
+            ref="billingcardref"
+          ></stripe-card-element>
         </div>
-        <p class="text-danger" v-if="cloudError"><small>An error occured while processing your request. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.</small></p>
+        <p class="text-danger" v-if="cloudError">
+          <small
+            >An error occured while processing your request. Please check your
+            information and try again, or
+            <a href="/contact">contact support</a> if the error persists.</small
+          >
+        </p>
       </div>
       <div class="modal-footer flex-row-reverse justify-content-start">
-        <ajax-button :syncing="syncing" class="btn btn-info">Save card</ajax-button>
-        <button type="button" class="btn btn-outline-danger mr-2" data-dismiss="modal">Cancel</button>
+        <ajax-button :syncing="syncing" class="btn btn-info"
+          >Save card</ajax-button
+        >
+        <button
+          type="button"
+          class="btn btn-outline-danger mr-2"
+          data-dismiss="modal"
+        >
+          Cancel
+        </button>
       </div>
     </ajax-form>
-  </modal>
+  </modal> -->
 
   <% /* Confirm Remove Card Info Modal */ %>
-  <modal v-if="modal === 'remove-billing-card'" @close="closeModal()" v-cloak>
+  <!-- <modal v-if="modal === 'remove-billing-card'" @close="closeModal()" v-cloak>
     <div class="modal-header">
       <h5 class="modal-title">Remove Card Info?</h5>
     </div>
-    <ajax-form action="updateBillingCard" :syncing.sync="syncingRemoveCard" :cloud-error.sync="cloudError" :form-data="formData" :form-rules="formRules" :form-errors.sync="formErrors" @submitted="submittedRemoveCardForm()">
+    <ajax-form
+      action="updateBillingCard"
+      :syncing.sync="syncingRemoveCard"
+      :cloud-error.sync="cloudError"
+      :form-data="formData"
+      :form-rules="formRules"
+      :form-errors.sync="formErrors"
+      @submitted="submittedRemoveCardForm()"
+    >
       <div class="modal-body text-center">
-        <p>Are you sure you want to remove your {{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong>?</p>
-        <p class="text-muted mb-0">This may restrict your access to paid features.</p>
+        <p>
+          Are you sure you want to remove your {{ me.billingCardBrand }} ending
+          in <strong>{{ me.billingCardLast4 }}</strong
+          >?
+        </p>
+        <p class="text-muted mb-0">
+          This may restrict your access to paid features.
+        </p>
         <cloud-error v-if="cloudError"></cloud-error>
       </div>
       <div class="modal-footer border-0 justify-content-center">
-        <button data-dismiss="modal" class="btn btn-outline-secondary mr-2">Never mind</button>
-        <ajax-button type="submit" :syncing="syncingRemoveCard" class="btn btn-danger ml-2">Remove</ajax-button>
+        <button data-dismiss="modal" class="btn btn-outline-secondary mr-2">
+          Never mind
+        </button>
+        <ajax-button
+          type="submit"
+          :syncing="syncingRemoveCard"
+          class="btn btn-danger ml-2"
+          >Remove</ajax-button
+        >
       </div>
     </ajax-form>
-  </modal>
+  </modal> -->
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
