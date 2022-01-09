@@ -15,8 +15,8 @@ module.exports.routes = {
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
   'GET /':                   { action: 'view-homepage-or-redirect' },
   'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
-  
-  'GET /validate/:licenseKey': {action: 'license/check-if-key-is-valid'},
+  'GET /activatelicense': { action: 'view-activatelicense' },
+  'GET /activate/licensekey': {action: 'license/check-if-key-is-valid'},
 
   'GET /faq':                { action:   'view-faq' },
   'GET /legal/terms':        { action:   'legal/view-terms' },
@@ -28,6 +28,7 @@ module.exports.routes = {
   'GET /email/confirmed':    { action: 'entrance/view-confirmed-email' },
 
   'GET /login':              { action: 'entrance/view-login' },
+  'GET /delete/user/:id':              { action: 'delete-user' },
   'GET /password/forgot':    { action: 'entrance/view-forgot-password' },
   'GET /password/new':       { action: 'entrance/view-new-password' },
 
@@ -35,7 +36,13 @@ module.exports.routes = {
   'GET /account/password':   { action: 'account/view-edit-password' },
   'GET /account/profile':    { action: 'account/view-edit-profile' },
   'GET /list-audiobaze-normalusers': { action: 'view-list-audiobaze-normalusers'},
-
+  'GET /list-users': { action: 'license/list-users'},
+  'POST /activate/licensekey': { action: 'license/activate-license'},
+  'GET /list-keys': { action: 'view-list-keys' },  
+  'GET /view-keys/valid': { action: 'send-list-keys-valid' },  
+  'GET /view-keys/activated': { action: 'list-noactive-licenses' },  
+  'GET /view-keys/unactivated-users': { action: 'list-unactivated-users' },  
+  'GET /generate-keys': { action: 'generate-keys' },  
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
   //  ╩ ╩╩╚═╝╚═╝  ╩╚═╚═╝═╩╝╩╩╚═╚═╝╚═╝ ╩ ╚═╝  └┘   ═╩╝╚═╝╚╩╝╝╚╝╩═╝╚═╝╩ ╩═╩╝╚═╝
@@ -64,6 +71,5 @@ module.exports.routes = {
   'POST  /api/v1/entrance/update-password-and-login':    { action: 'entrance/update-password-and-login' },
   'POST  /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
   'POST  /api/v1/observe-my-session':                 { action: 'observe-my-session', hasSocketFeatures: true },
-  'POST  /activate/license':                 { action: 'licence/activate-license' },
 
 };

@@ -23,7 +23,7 @@ module.exports = {
 
     keyStatus:{
       type:'string',
-      isIn:['valid', 'expired','activated','revoke'],
+      isIn:['valid', 'expired','activated','revoked'],
       defaultsTo: 'valid',
       description : 'Key Status'
     },

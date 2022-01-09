@@ -155,6 +155,16 @@ without necessarily having a billing card.`
       example: 1502844074211
     },
 
+    accountCreationDate:{
+      type: 'string',
+      description: 'Data account was created on the back end in dd/mm/yyyy format'
+    },
+
+    activationStatus:{
+      type: 'string',
+      isIn: ['unactivated', 'activated', 'revoked'],
+      description: 'Status if account is activated for service'
+    },
     licenseData:{
       type:'json',
       description: "json file to hold license data"

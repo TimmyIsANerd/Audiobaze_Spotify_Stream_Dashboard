@@ -1,211 +1,268 @@
- <!--     Fonts and icons     -->
- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
- <!-- Nucleo Icons -->
- <link href="css/nucleo-icons.css" rel="stylesheet" />
- <link href="css/nucleo-svg.css" rel="stylesheet" />
- <!-- Font Awesome Icons -->
- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
- <!-- Material Icons -->
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
- <!-- CSS Files -->
- <link id="pagestyle" href="css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+<!--     Fonts and icons     -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+/>
+<!-- Nucleo Icons -->
+<link href="css/nucleo-icons.css" rel="stylesheet" />
+<link href="css/nucleo-svg.css" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<script
+  src="https://kit.fontawesome.com/42d5adcbca.js"
+  crossorigin="anonymous"
+></script>
+<!-- Material Icons -->
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+  rel="stylesheet"
+/>
+<!-- CSS Files -->
+<link
+  id="pagestyle"
+  href="css/material-dashboard.css?v=3.0.0"
+  rel="stylesheet"
+/>
 <div id="welcome">
-  <!-- Alert -->
-  <div class="col-lg-3 col-sm-6 col-12 mt-sm-0 mt-2" style="visibility:hidden;">
-    <button class="btn bg-gradient-info w-100 mb-0 toast-btn" type="button" data-target="infoToast">Info</button>
-  </div>
-  <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast" aria-atomic="true">
-    <div class="toast-header bg-transparent border-0">
-      <i class="material-icons text-white me-2">
-        notifications
-      </i>
-      <span class="me-auto text-white font-weight-bold">Material Dashboard </span>
-      <small class="text-white">11 mins ago</small>
-      <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-    </div>
-    <hr class="horizontal light m-0">
-    <div class="toast-body text-white">
-      Hello User!<br>
-      Please purchase a license and activate to be able to use the streaming bot service.
-    </div>
-  </div>
-  <!-- Alert -->
   <account-notification-banner></account-notification-banner>
   <div class="container pt-5 pb-5">
-    <h1 class="mt-1 mb-5">Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %> User <% } %>!</h1>
-    <% if(me.isSuperAdmin === true) {%> 
-      <div class="row mt-4">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                <h4 class="mb-0">$53k</h4>
-              </div>
+    <h1 class="mt-1 mb-5">
+      Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %> User <% }
+      %>!
+    </h1>
+    <% if(me.isSuperAdmin === true) {%>
+    <div class="row mt-4" id="adminDashboard">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">keys</i>
             </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                <h4 class="mb-0">2,300</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">License Keys Left</p>
+              <h4 class="mb-0" id="licenseKeysLeft"></h4>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                <h4 class="mb-0">3,462</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Sales</p>
-                <h4 class="mb-0">$103,430</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
-            </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <a href="/generate-keys"
+                ><span class="text-dark text-sm font-weight-bolder"
+                  >Generate More</span
+                ></a
+              >
+              License Keys
+            </p>
           </div>
         </div>
       </div>
-    <% } else { %>
-      <div class="row">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Total Users</p>
+              <h4 class="mb-0" id="totalUsers"></h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-primary text-sm font-weight-bolder"
+                >Audiobaze </span
+              >Platform
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">key</i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Activated Licenses</p>
+              <h4 class="mb-0" id="activatedLicenses"></h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-success text-sm font-weight-bolder">Current Licenses</span>
+              in Use
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <div class="text-end pt-1" >
+              <p class="text-sm mb-0 text-capitalize">Unactivated Users</p>
+              <h4 class="mb-0" id="unactivatedUsers"></h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-info text-sm font-weight-bolder">Users </span
+              >without a license
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-xl-4 col-md-4 col-lg-4 card shadow-dark">
+       <div class="my-3">
+        <h3>Hey Admin</h3>
+        <p>You have access to the entire platform, its license keys and ability to manage its resources. 
+        <br />
+        You can even generate license keys.
+        </p>
+        <a href="/generate-keys" class="btn btn-info shadow-info">Generate 100 Keys!</a>
+       </div>
+      </div>
+      <div class="col-xl-4 col-md-4 col-lg-4 card  mx-2 bg-gradient-dark shadow-dark ">
+        <div class="my-3 text-white">
+         <h3 class="text-white">User Management</h3>
+         <p>Only Activated Users will be able to use the streaming bot services.</p>
+         <a href="/list-audiobaze-normalusers" class="btn btn-primary shadow-primary">List Users</a>
+        </div>
+       </div>
+    </div>
+    <% } %>
+
+    <% if(me.isSuperAdmin === false) { %>
+      <div class="row mt-4 mb-5" id="userdashboard">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute"
+              >
                 <i class="material-icons opacity-10">person</i>
               </div>
-              <div class="text-end pt-5">
-                <p class="text-sm mb-0 text-capitalize">Hello User</p>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">User</p>
                 <h4 class="mb-0">{{ me.fullName }}</h4>
               </div>
             </div>
-            <hr class="dark horizontal my-0">
+            <hr class="dark horizontal my-0" />
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-primary text-sm font-weight-bolder">Email: </span>{{ me.emailAddress }}</p>
+              <p class="mb-0">
+                <span class="text-dark text-sm font-weight-bolder"
+                    >Email </span>
+                {{ me.emailAddress }}
+              </p>
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
+              >
                 <i class="material-icons opacity-10">key</i>
               </div>
-              <div class="text-end pt-3">
-                <p class="text-sm mb-0 text-capitalize">Bot License</p>
-                <h4 class="mb-0">
-                  {{ me.licenseData ? "Active" : "Inactive" }}</h4>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Activation Status</p>
+                <h4 class="mb-0 text-capitalize">{{me.activationStatus}}</h4>
               </div>
             </div>
-            <hr class="dark horizontal my-0">
+            <hr class="dark horizontal my-0" />
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-dark text-sm font-weight-bolder"></span>{{ me.licenseData ? "License Activated : Streaming Bot Services Available" : "License required to activate bot streaming services" }}</p>
+              <p class="mb-0">
+                <span class="text-primary text-sm font-weight-bolder"
+                  >Audiobaze </span
+                >Platform
+              </p>
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">timeline</i>
+              <div
+                class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
+              >
+                <i class="material-icons opacity-10">calendar</i>
               </div>
-              <div class="text-end pt-3">
-                <p class="text-sm mb-0 text-capitalize">Last Login</p>
-                <h4 class="mb-0"><js-timestamp :at="pageLoadedAt" format="timeago" short="true"></js-timestamp></h4>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
+                <% const expirydate = JSON.parse(me.licenseData) %> 
+                <h4 class="mb-0"><%= expirydate.expiryDate %> </h4>
               </div>
             </div>
-            <hr class="dark horizontal my-0">
+            <hr class="dark horizontal my-0" />
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Last Login</span> date</p>
+              <p class="mb-0">
+                <span class="text-success text-sm font-weight-bolder">License</span>
+                Expiry
+              </p>
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">schedule</i>
+              <div
+                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute"
+              >
+                <i class="material-icons opacity-10">clock</i>
               </div>
-              <div class="text-end pt-3">
-                <p class="text-sm mb-0 text-capitalize">Days Left</p>
-                <h4 class="mb-0">30</h4>
+              <div class="text-end pt-1" >
+                <p class="text-sm mb-0 text-capitalize">Account Creation Date</p>
+                <h4 class="mb-0">{{me.accountCreationDate}}</h4>
               </div>
             </div>
-            <hr class="dark horizontal my-0">
+            <hr class="dark horizontal my-0" />
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-info text-sm font-weight-bolder">Bot services</span> countdown</p>
+              <p class="mb-0">
+                <span class="text-info text-sm font-weight-bolder"><a href="/contact">Contact Admin:</a> </span
+                > Purchase a License
+              </p>
             </div>
           </div>
         </div>
-        
       </div>
 
-      <!-- Activate License -->
-      <div class="row py-3 my-3 mb-xl-0 card">
-        <div class="col-xl-5">
-          <h3>License Key Activation</h3>
-          <form action="/activate/license" method="post" id="licenseActivator">
-            <div class="input-group input-group-outline">
-              <label for="licenseForm"></label>
-              <input type="text" id="licenseForm" class="form-control" placeholder="License Key">
-              <button type="submit" class="btn btn-primary btn-md">Activate</button>
-            </div>
-          </form>
-          <p class="mt-2" id="activationMessageStatus"></p>
+      <div class="row mt-4">
+        <div class="col-xl-4 col-md-4 col-lg-4 card shadow-dark">
+         <div class="my-3">
+          <h3>Activate License Key</h3>
+          <p>You will need to activate your license key to use Audiobaze spotify bot services.</p>
+          <a href="/activatelicense" class="btn btn-info">Go Activate!</a>
+         </div>
         </div>
+        <div class="col-xl-4 col-md-4 col-lg-4 card  mx-2 bg-gradient-dark shadow-dark ">
+          <div class="my-3 text-white">
+           <h3 class="text-white">Confirm Status</h3>
+           <p>Make sure your activation status changes to "active" before trying to use the bot.</p>
+          </div>
+         </div>
       </div>
-
-    <% } %>  
-    
-    <p>This is a page that only logged-in people can visit. Don't you feel special? Try clicking on a button below to do some things you can't do when you're logged out.</p>
+    <% } %>
 
   </div>
-
   <router-view></router-view>
 </div>
 
-
-<script>
-  const msg = document.getElementById('activationMessageStatus');
-
-  msg.innerHTML = "You have successfully activated the audiobaze bot service for 30 days.";
-</script>
-<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */
+exposeLocalsToBrowser() %>

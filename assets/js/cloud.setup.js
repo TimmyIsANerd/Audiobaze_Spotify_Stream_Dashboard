@@ -11,9 +11,85 @@
  */
 
 Cloud.setup({
-
   /* eslint-disable */
-  methods: {"confirmEmail":{"verb":"GET","url":"/email/confirm","args":["token"]},"logout":{"verb":"GET","url":"/api/v1/account/logout","args":[]},"updatePassword":{"verb":"PUT","url":"/api/v1/account/update-password","args":["password"]},"updateProfile":{"verb":"PUT","url":"/api/v1/account/update-profile","args":["fullName","emailAddress"]},"updateBillingCard":{"verb":"PUT","url":"/api/v1/account/update-billing-card","args":["stripeToken","billingCardLast4","billingCardBrand","billingCardExpMonth","billingCardExpYear"]},"login":{"verb":"PUT","url":"/api/v1/entrance/login","args":["emailAddress","password","rememberMe"]},"signup":{"verb":"POST","url":"/api/v1/entrance/signup","args":["emailAddress","password","fullName"]},"sendPasswordRecoveryEmail":{"verb":"POST","url":"/api/v1/entrance/send-password-recovery-email","args":["emailAddress"]},"updatePasswordAndLogin":{"verb":"POST","url":"/api/v1/entrance/update-password-and-login","args":["password","token"]},"deliverContactFormMessage":{"verb":"POST","url":"/api/v1/deliver-contact-form-message","args":["emailAddress","topic","fullName","message"]},"observeMySession":{"verb":"POST","url":"/api/v1/observe-my-session","args":[],"protocol":"io.socket"}}
+  methods: {
+    checkIfKeyIsValid: {
+      verb: "GET",
+      url: "/validate/:licenseKey",
+      args: ["licenseKey", "keyStatus", "currentKeyUser"],
+    },
+    confirmEmail: { verb: "GET", url: "/email/confirm", args: ["token"] },
+    listUsers: { verb: "GET", url: "/list-users", args: [] },
+    activateLicense: {
+      verb: "POST",
+      url: "/activate/licensekey",
+      args: ["currentKeyUser", "licenseKey"],
+    },
+    sendListKeysValid: { verb: "GET", url: "/view-keys/valid", args: [] },
+    listNoactiveLicenses: {
+      verb: "GET",
+      url: "/view-keys/activated",
+      args: [],
+    },
+    listUnactivatedUsers: {
+      verb: "GET",
+      url: "/view-keys/unactivated-users",
+      args: [],
+    },
+    generateKeys: { verb: "GET", url: "/generate-keys", args: [] },
+    logout: { verb: "GET", url: "/api/v1/account/logout", args: [] },
+    updatePassword: {
+      verb: "PUT",
+      url: "/api/v1/account/update-password",
+      args: ["password"],
+    },
+    updateProfile: {
+      verb: "PUT",
+      url: "/api/v1/account/update-profile",
+      args: ["fullName", "emailAddress"],
+    },
+    updateBillingCard: {
+      verb: "PUT",
+      url: "/api/v1/account/update-billing-card",
+      args: [
+        "stripeToken",
+        "billingCardLast4",
+        "billingCardBrand",
+        "billingCardExpMonth",
+        "billingCardExpYear",
+      ],
+    },
+    login: {
+      verb: "PUT",
+      url: "/api/v1/entrance/login",
+      args: ["emailAddress", "password", "rememberMe"],
+    },
+    signup: {
+      verb: "POST",
+      url: "/api/v1/entrance/signup",
+      args: ["emailAddress", "password", "fullName"],
+    },
+    sendPasswordRecoveryEmail: {
+      verb: "POST",
+      url: "/api/v1/entrance/send-password-recovery-email",
+      args: ["emailAddress"],
+    },
+    updatePasswordAndLogin: {
+      verb: "POST",
+      url: "/api/v1/entrance/update-password-and-login",
+      args: ["password", "token"],
+    },
+    deliverContactFormMessage: {
+      verb: "POST",
+      url: "/api/v1/deliver-contact-form-message",
+      args: ["emailAddress", "topic", "fullName", "message"],
+    },
+    observeMySession: {
+      verb: "POST",
+      url: "/api/v1/observe-my-session",
+      args: [],
+      protocol: "io.socket",
+    },
+  },
   /* eslint-enable */
-
 });

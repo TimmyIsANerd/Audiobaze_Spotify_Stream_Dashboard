@@ -20,10 +20,16 @@ module.exports = {
 
   exits: {
     success: {
-      description: "License Key Activated",
+      description: "License Key Successfully Activated",
     },
     failure: {
-      description: "License Key Deactivated",
+      description: "License Key Activation Failed",
+    },
+    invalid: {
+      description: "Invalid License Key",
+    },
+    used: {
+      descriptiion: "Used License Key",
     },
   },
 
@@ -50,57 +56,23 @@ module.exports = {
 
     const data = JSON.stringify(BotData);
 
-    // Check if License is Valid
-    await License.findOne({ licenseKey }).then((data) => {
-      if (!data || data === undefined) {
-        sails.log.info("License Key Invalid");
-        return res
-          .json({
-            status: "License Key Invalid",
-            message: "License Key Invalid",
-          })
-          .status(500);
-      } else if (data.keyStatus === "valid") {
-        return res
-          .json({
-            status: "License Key Valid & Activated",
-            message: "License Key Valid & Activated",
-          })
-          .status(200);
-      } else if (data.keyStatus === "expired") {
-        sails.log.info("License Key Expired");
-        return res
-          .json({
-            status: "License Key Expired",
-            message: "License Key Expired",
-          })
-          .status(300);
-      } else if (data.currentKeyUser.length > 0) {
-        sails.log.info("License Key already Activated");
-        return res
-          .json({
-            status: "License Key already Activated",
-            message: "License Key already Activated",
-            user: data.currentKeyUser,
-          })
-          .status(500);
-      }
+    const licenseRecord = await License.findOne({
+      licenseKey,
+      keyStatus: "valid",
     });
-
-    const licenseValidity = await License.findOne({ licenseKey });
-
-    if (licenseValidity.keyStatus === "valid") {
-      // Update Record : License Data
-      await User.updateOne({
-        id: req.me.id,
-      }).set({
-        licenseData: data,
-      });
-      // Update Record for License
-      await License.updateOne({ licenseKey }).set({
-        currentKeyUser: req.me.emailAddress,
+    sails.log.info(licenseRecord);
+    sails.log.info(this.req.me);
+    if (!licenseRecord) {
+      throw "invalid";
+    } else {
+      await License.updateOne({ licenseKey, keyStatus: "valid" }).set({
         keyStatus: "activated",
+        currentKeyUser: this.req.me.emailAddress
       });
+      await User.updateOne({id:this.req.me.id}).set({
+        activationStatus:'activated',
+        licenseData:data
+      })
     }
   },
 };

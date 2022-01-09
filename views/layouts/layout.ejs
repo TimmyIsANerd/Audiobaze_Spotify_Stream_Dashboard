@@ -129,6 +129,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link text-white" href="/list-keys" id="listLicenseKeys">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">key</i>
+                </div>
+                <span class="nav-link-text ms-1">List License Keys</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link text-white " href="/account/password" id="changePasswordLink">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="material-icons opacity-10">lock</i>
@@ -312,6 +320,7 @@
     <script src="/js/pages/account/account-overview.page.js"></script>
     <script src="/js/pages/account/edit-password.page.js"></script>
     <script src="/js/pages/account/edit-profile.page.js"></script>
+    <script src="/js/pages/activatelicense.page.js"></script>
     <script src="/js/pages/contact.page.js"></script>
     <script src="/js/pages/dashboard/welcome.page.js"></script>
     <script src="/js/pages/entrance/confirmed-email.page.js"></script>
@@ -324,6 +333,7 @@
     <script src="/js/pages/legal/privacy.page.js"></script>
     <script src="/js/pages/legal/terms.page.js"></script>
     <script src="/js/pages/list-audiobaze-normalusers.page.js"></script>
+    <script src="/js/pages/list-keys.page.js"></script>
     <script src="/js/plugins/bootstrap-notify.js"></script>
     <script src="/js/plugins/chartjs.min.js"></script>
     <script src="/js/plugins/perfect-scrollbar.min.js"></script>
@@ -417,6 +427,7 @@
       const listUsersLink = document.getElementById('listUsersLink');
       const changePasswordLink = document.getElementById('changePasswordLink');
       const faqLink = document.getElementById('faqLink');
+      const licenseKeyLink = document.getElementById('listLicenseKeys')
 
       let url = window.location.href;
       if(url.includes('welcome')){
@@ -430,8 +441,11 @@
       if(url.includes('/account/password')){
         changePasswordLink.classList.add('active');
       }
-      if(url.includes('list')){
+      if(url.includes('list-audiobaze-normalusers')){
         listUsersLink.classList.add('active');
+      }
+      if(url.includes('keys')){
+        licenseKeyLink.classList.add('active');
       }
     </script>
   </body>

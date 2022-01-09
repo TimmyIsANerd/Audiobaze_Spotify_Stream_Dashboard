@@ -59,37 +59,42 @@ module.exports.bootstrap = async function() {
   }//∞
 
   // By convention, this is a good place to set up fake data during development.
+  var today = new Date();
+  var today = today.toLocaleDateString();
+
+
   await User.createEach([
-    { emailAddress: 'admin@example.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('abc123') },
+    { emailAddress: 'admin@example.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('abc123'),accountCreationDate:today },
   ]);
 
   // Key Generator for License
-  const keyGen = async () =>{
+  const keyGen = async () => {
     var text = "";
 
     var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     for (var i = 0; i < 35; i++)
-    text += charset.charAt(Math.floor(Math.random() * charset.length));
-  
+      text += charset.charAt(Math.floor(Math.random() * charset.length));
+
     return text;
-  }
+  };
 
   // Mass Create License Keys
   const sendKeysToDB = async () => {
-    for (var i = 0; i < 100; i++){
+    for (var i = 0; i < 100; i++) {
       await License.createEach([
         {
           licenseKey: await keyGen(),
-          keyStatus:'valid',
-          currentKeyUser:''
-        }
-      ])
+          keyStatus: "valid",
+          currentKeyUser: "",
+        },
+      ]);
     }
-  }
+  };
 
   // Call Mass Creation
   await sendKeysToDB();
+
 
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({
