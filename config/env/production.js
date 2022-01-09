@@ -253,7 +253,8 @@ module.exports = {
     onlyAllowOrigins: [
       'https://example.com',
       'https://staging.example.com',
-      'https://gracious-lichterman-926b23.netlify.app'
+      'https://gracious-lichterman-926b23.netlify.app',
+      'https://audiobaze.netlify.app'
     ],
 
 
