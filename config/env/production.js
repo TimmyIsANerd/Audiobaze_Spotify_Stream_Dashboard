@@ -253,7 +253,7 @@ module.exports = {
     onlyAllowOrigins: [
       'https://example.com',
       'https://staging.example.com',
-      'gracious-lichterman-926b23.netlify.app'
+      'https://gracious-lichterman-926b23.netlify.app'
     ],
 
 
