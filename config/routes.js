@@ -34,6 +34,7 @@ module.exports.routes = {
 
   'GET /account':            { action: 'account/view-account-overview' },
   'GET /account/password':   { action: 'account/view-edit-password' },
+  'GET /check/expiry':   { action: 'check-expiry' },
   'GET /account/profile':    { action: 'account/view-edit-profile' },
   'GET /list-audiobaze-normalusers': { action: 'view-list-audiobaze-normalusers'},
   'GET /list-users': { action: 'license/list-users'},

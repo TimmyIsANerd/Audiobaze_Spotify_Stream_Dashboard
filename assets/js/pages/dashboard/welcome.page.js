@@ -35,6 +35,7 @@ parasails.registerPage("welcome", {
   },
   mounted: async function () {
     const adminDash = document.querySelector('#adminDashboard');
+    
     if (adminDash) {
       async function gettingNumberOfValidKeys(url, el) {
         el.innerHTML = "...";
@@ -102,6 +103,22 @@ parasails.registerPage("welcome", {
         "/view-keys/activated",
         document.getElementById("activatedLicenses")
       );
+    }
+
+    const expiryDate = document.querySelector('#serviceExpiry');
+
+    if(expiryDate){
+      async function checkExpiry(url,el){
+        const res = await fetch(url);
+        const data = await res.json();
+        if(data){
+          el.innerHTML = data.message;
+        } else {
+          el.innerHTML = "..."
+        }
+      }
+
+      checkExpiry('/check/expiry',expiryDate);
     }
   },
 

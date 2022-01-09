@@ -205,9 +205,14 @@
                 <i class="material-icons opacity-10">calendar</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
-                <% const expirydate = JSON.parse(me.licenseData) %> 
-                <h4 class="mb-0"><%= expirydate.expiryDate %> </h4>
+                <% if(me.licenseData){ %>
+                  <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
+                  <% const expirydate = JSON.parse(me.licenseData) %> 
+                  <h4 class="mb-0"><%= expirydate.expiryDate %> </h4>
+                <% } else {%>
+                  <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
+                  <h4 class="mb-0" id="serviceExpiry">...</h4>
+                <% } %> 
               </div>
             </div>
             <hr class="dark horizontal my-0" />

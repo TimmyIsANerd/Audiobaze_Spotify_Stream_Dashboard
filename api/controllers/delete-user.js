@@ -11,7 +11,7 @@
 
     const res = this.res;
 
-    const deleteUser = await User.removeAndUpdate({id}).then(res =>{
+    const deleteUser = await User.destroyOne({id}).then(res =>{
       res.redirect('list-audiobaze-normalusers');
     }).catch(error =>{
       return res.json({
