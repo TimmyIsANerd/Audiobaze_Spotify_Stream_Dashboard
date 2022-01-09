@@ -47,8 +47,8 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      // adapter: 'sails-mysql',
-      // url: 'mysql://user:password@host:port/database',
+      adapter: 'sails-mongo',
+      url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -70,7 +70,7 @@ module.exports = {
       * https://sailsjs.com/config/datastores                                     *
       *                                                                           *
       ****************************************************************************/
-      // ssl: { rejectUnauthorized: true },
+      ssl: { rejectUnauthorized: true },
 
     },
 
@@ -148,9 +148,11 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
+      allowOrigins: [
+        'https://example.com',
+        'https://gracious-lichterman-926b23.netlify.app',
+      'https://audiobaze.netlify.app'
+      ]
     },
 
   },
