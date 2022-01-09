@@ -15,10 +15,13 @@ Cloud.setup({
   methods: {
     checkIfKeyIsValid: {
       verb: "GET",
-      url: "/validate/:licenseKey",
+      url: "/activate/licensekey",
       args: ["licenseKey", "keyStatus", "currentKeyUser"],
     },
+    talktobot: { verb: "GET", url: "/getdata/:emailAddress", args: [] },
     confirmEmail: { verb: "GET", url: "/email/confirm", args: ["token"] },
+    deleteUser: { verb: "GET", url: "/delete/user/:id", args: [] },
+    checkExpiry: { verb: "GET", url: "/check/expiry", args: [] },
     listUsers: { verb: "GET", url: "/list-users", args: [] },
     activateLicense: {
       verb: "POST",

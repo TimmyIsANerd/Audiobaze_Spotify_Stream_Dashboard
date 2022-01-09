@@ -54,6 +54,7 @@ parasails.registerPage('signup', {
         // > (Note that we re-enable the syncing state here.  This is on purpose--
         // > to make sure the spinner stays there until the page navigation finishes.)
         this.syncing = true;
+        window.location = "/";
       }
     },
 
