@@ -186,7 +186,10 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'connect-mongodb-session',
-    url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    uri: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
