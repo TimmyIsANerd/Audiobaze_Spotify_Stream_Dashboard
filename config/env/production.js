@@ -48,7 +48,9 @@ module.exports = {
     ***************************************************************************/
     default: {
       adapter: 'sails-mongo',
-      url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      url: 'mongodb://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      ssl: true,
+      authSource:'testUser',
 
     //  --------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
