@@ -185,7 +185,7 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    adapter: '@sailshq/connect-mongo',
+    adapter: 'connect-mongo',
     url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
