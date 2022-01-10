@@ -252,7 +252,6 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'https://example.com',
       'https://audiobaze.netlify.app'
     ],
 
@@ -269,8 +268,8 @@ module.exports = {
     * (https://sailsjs.com/docs/concepts/deployment/scaling)                   *
     *                                                                          *
     ***************************************************************************/
-    adapter: '@sailshq/socket.io-redis',
-    url: 'redis://timmy:TimmyIsANerd1!@redis-13033.c55.eu-central-1-1.ec2.cloud.redislabs.com:13033',
+    // adapter: '@sailshq/socket.io-redis',
+    // url: 'redis://timmy:TimmyIsANerd1!@redis-13033.c55.eu-central-1-1.ec2.cloud.redislabs.com:13033',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
