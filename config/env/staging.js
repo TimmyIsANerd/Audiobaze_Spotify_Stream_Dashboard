@@ -29,8 +29,8 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
 
   datastores: Object.assign({}, PRODUCTION_CONFIG.datastores, {
     default: Object.assign({}, PRODUCTION_CONFIG.datastores.default, {
-     adapter: 'sails-mongo',
-     url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    //  adapter: 'sails-mongo',
+    //  url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
       //--------------------------------------------------------------------------
       // /\  Hard-code your staging db `url`.
       // ||  (or use system env var: `sails_datastores__default__url`)
@@ -40,13 +40,13 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
 
   sockets: Object.assign({}, PRODUCTION_CONFIG.sockets, {
 
-    onlyAllowOrigins: [
-      'https://audiobaze.netlify.app',
-      // 'http://example-staging.herokuapp.com',
-      // 'https://staging.example.com',
-      // 'http://staging.example.com',
-    ],
-    //--------------------------------------------------------------------------
+    // onlyAllowOrigins: [
+    //   'https://audiobaze.netlify.app',
+    //   // 'http://example-staging.herokuapp.com',
+    //   // 'https://staging.example.com',
+    //   // 'http://staging.example.com',
+    // ],
+    // //--------------------------------------------------------------------------
     // /\  Hard-code a staging-only override for allowed origins.
     // ||  (or set this array via JSON-encoded system env var)
     //     ```
@@ -62,7 +62,7 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
   }),
 
   session: Object.assign({}, PRODUCTION_CONFIG.session, {
-    url: 'redis://timmy:TheTitan1123!@redis-13033.c55.eu-central-1-1.ec2.cloud.redislabs.com:13033',
+    // url: 'redis://timmy:TheTitan1123!@redis-13033.c55.eu-central-1-1.ec2.cloud.redislabs.com:13033',
     //--------------------------------------------------------------------------
     // /\  Hard-code your staging Redis server's `url` again here.
     // ||  (or use system env var: `sails_session__url`)
@@ -71,7 +71,7 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
 
   custom: Object.assign({}, PRODUCTION_CONFIG.custom, {
 
-    baseUrl: 'https://audiobaze.netlify.app',
+    // baseUrl: 'https://audiobaze.netlify.app',
     //--------------------------------------------------------------------------
     // /\  Hard-code the base URL where your staging environment is hosted.
     // ||  (or use system env var: `sails_custom__baseUrl`)

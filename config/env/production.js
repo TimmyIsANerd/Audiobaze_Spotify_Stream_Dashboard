@@ -48,9 +48,8 @@ module.exports = {
     ***************************************************************************/
     default: {
       adapter: 'sails-mongo',
-      url: 'mongodb://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
       ssl: true,
-      authSource:'testUser',
 
     //  --------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
@@ -376,7 +375,7 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    baseUrl: 'https://example.com',
+    baseUrl: 'https://audiobaze.netlify.app',
     internalEmailAddress: 'support@example.com',
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
