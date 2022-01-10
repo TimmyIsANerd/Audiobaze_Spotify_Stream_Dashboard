@@ -92,7 +92,7 @@ module.exports = {
     * https://sailsjs.com/docs/concepts/models-and-orm/model-settings#?migrate *
     *                                                                          *
     ***************************************************************************/
-    migrate: 'drop',
+    migrate: 'safe',
 
     /***************************************************************************
     *                                                                          *
@@ -151,7 +151,7 @@ module.exports = {
     ***************************************************************************/
     cors: {
       allowOrigins: [
-        'https://audiobaze.netlify.app',
+        'https://audiobaze.net',
       ]
     },
 
@@ -241,48 +241,7 @@ module.exports = {
   * > this section from your `config/env/production.js` file.                *
   *                                                                          *
   ***************************************************************************/
-  sockets: {
-
-    /***************************************************************************
-    *                                                                          *
-    * Uncomment the `onlyAllowOrigins` whitelist below to configure which      *
-    * "origins" are allowed to open socket connections to your Sails app.      *
-    *                                                                          *
-    * > Replace "https://example.com" etc. with the URL(s) of your app.        *
-    * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
-    *                                                                          *
-    ***************************************************************************/
-    onlyAllowOrigins: [
-      'https://audiobaze.netlify.app'
-    ],
-
-
-    /***************************************************************************
-    *                                                                          *
-    * If you are deploying a cluster of multiple servers and/or processes,     *
-    * then uncomment the following lines.  This tells Socket.io about a Redis  *
-    * server it can use to help it deliver broadcasted socket messages.        *
-    *                                                                          *
-    * > Be sure a compatible version of @sailshq/socket.io-redis is installed! *
-    * > (See https://sailsjs.com/config/sockets for the latest version info)   *
-    *                                                                          *
-    * (https://sailsjs.com/docs/concepts/deployment/scaling)                   *
-    *                                                                          *
-    ***************************************************************************/
-    adapter: '@sailshq/socket.io-redis',
-    url: 'redis://timmy:TimmyIsANerd1!@redis-13033.c55.eu-central-1-1.ec2.cloud.redislabs.com:13033',
-    //--------------------------------------------------------------------------
-    // /\   OR, to avoid checking it in to version control, you might opt to
-    // ||   set sensitive credentials like this using an environment variable.
-    //
-    // For example:
-    // ```
-    // sails_sockets__url=redis://admin:myc00lpAssw2D@bigsquid.redistogo.com:9562/0
-    // ```
-    //--------------------------------------------------------------------------
-
-  },
-
+ 
 
 
   /**************************************************************************
