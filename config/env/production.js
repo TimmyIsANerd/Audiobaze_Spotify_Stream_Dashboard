@@ -251,10 +251,10 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    onlyAllowOrigins: [
-      'https://example.com',
-      'https://audiobaze.netlify.app'
-    ],
+    // onlyAllowOrigins: [
+    //   'https://example.com',
+    //   'https://audiobaze.netlify.app'
+    // ],
 
 
     /***************************************************************************
