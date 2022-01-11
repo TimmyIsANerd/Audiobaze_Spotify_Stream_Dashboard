@@ -147,10 +147,10 @@
             <% } else {%>
             <li class="nav-item">
               <a class="nav-link text-white " href="/faq" id="faqLink">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="material-icons opacity-10">contact_support</i>
-                </div>
-                <span class="nav-link-text ms-1">FAQ</span>
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">contact_support</i>
+              </div>
+              <span class="nav-link-text ms-1">FAQ</span>
               </a>
             </li>
             <li class="nav-item">
@@ -159,6 +159,14 @@
                   <i class="material-icons opacity-10">lock</i>
                 </div>
                 <span class="nav-link-text ms-1">Change Password</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white " href="/contact" id="faqLink">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">help</i>
+                </div>
+                <span class="nav-link-text ms-1">Contact Admin</span>
               </a>
             </li>
             <% } %>  
@@ -219,8 +227,7 @@
 
       <%- body %>
 
-      <% if(me) {%>
-          <footer class="footer py-4  ">
+          <footer class="footer pt-4 mt-5" style="margin-top:90vh;">
             <div class="container-fluid">
               <div class="row align-items-center justify-content-lg-between">
                 <div class="col-lg-6 mb-lg-0 mb-4">
@@ -253,21 +260,7 @@
               </div>
             </div>
           </footer>
-          <% } %>
       </div>
-      <% if(!me){ %>
-          <footer class="navbar navbar-light justify-content-between flex-row-reverse" purpose="page-footer">
-            <div class="nav" purpose="footer-nav">
-              <small class="nav-item d-inline-block"><a class="nav-link text-info px-1 px-sm-3" href="/contact">Contact<span class="d-none d-sm-inline"> us</span></a></small>
-              <small class="nav-item d-inline-block"><a class="nav-link text-info px-1 px-sm-3" href="/legal/terms">Terms<span class="d-none d-sm-inline"> of use</span></a></small>
-              <small class="nav-item d-inline-block"><a class="nav-link text-info px-1 px-sm-3" href="/legal/privacy">Privacy<span class="d-none d-sm-inline"> policy</span></a></small>
-              <% if(me) { %>
-              <small class="nav-item d-inline-block"><a class="nav-link text-info px-1 px-sm-3" href="/logout">Sign out</a></small>
-              <% } %>
-            </div>
-            <small purpose="footer-copy">Copyright &copy; <%= sails.config.custom.platformCopyrightYear %> <a class="text-info" href="/">Audiobaze</a>. <br class="d-block d-sm-none"/>All rights reserved.</small>
-          </footer>
-         <% }%> 
 
          
       </main>
