@@ -185,17 +185,8 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    adapter: 'connect-mongo',
-    url: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    collection: 'sessions',
-    stringify: true,
-    auto_reconnect: false,
-    mongoOptions: {
-      server: {
-        ssl: true
-      }
-    },
-
+    adapter: 'connect-mongodb-session',
+    uri: 'mongodb+srv://testUser:TheTitan1123@audiobaze.8pz2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
