@@ -64,7 +64,8 @@ module.exports.bootstrap = async function() {
 
 
   await User.createEach([
-    { emailAddress: 'admin@example.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('abc123'),accountCreationDate:today },
+    { emailAddress: 'admin@admin.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('112358138'),accountCreationDate:today },
+    { emailAddress: 'adefeyitimi@gmail.com', fullName: 'Adefeyitimi Adeyeloja', isSuperAdmin: false, password: await sails.helpers.passwords.hashPassword('TheTitan1123'),accountCreationDate:today },
   ]);
 
   // Key Generator for License
