@@ -27,7 +27,7 @@
   <account-notification-banner></account-notification-banner>
   <div class="container pt-5 pb-5">
     <h1 class="mt-1 mb-5">
-      Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %> User <% }
+      Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %> Audiobaze User <% }
       %>!
     </h1>
     <% if(me.isSuperAdmin === true) {%>
@@ -164,7 +164,7 @@
               </div>
               <div class="text-end pt-3">
                 <p class="text-sm mb-0 text-capitalize">User</p>
-                <h4 class="mb-0">{{ me.fullName }}</h4>
+                <h4 class="mb-0 mt-2">{{ me.fullName }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0" />
@@ -205,8 +205,7 @@
             <div class="card-header p-3 pt-2">
               <div
                 class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
-              >
-                <i class="material-icons opacity-10">calendartoday</i>
+              ><i class="material-icons opacity-10">calendartoday</i>
               </div>
               <div class="text-end pt-1">
                 <% if(me.licenseData){ %>
@@ -244,7 +243,7 @@
             <hr class="dark horizontal my-0" />
             <div class="card-footer p-3">
               <p class="mb-0">
-                <span class="text-info text-sm font-weight-bolder"><a href="/contact">Contact Admin:</a> </span
+                <span class="text-info text-sm font-weight-bolder"><a href="https://t.me/musicprofit4">Contact Admin:</a> </span
                 > Purchase a License
               </p>
             </div>
@@ -253,7 +252,7 @@
       </div>
 
       <div class="row mt-4">
-        <div class="col-xl-4 col-md-4 col-lg-4 ">
+        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
          <div class="card shadow-dark p-3">
           <div class="my-3">
             <h3>Activate License Key</h3>
@@ -262,14 +261,26 @@
            </div>
          </div>
         </div>
-        <div class="col-xl-4 col-md-4 col-lg-4 ">
+        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
+          <div class="card bg-gradient-primary shadow-dark p-3">
+            <div class="my-3 text-white">
+              <h3 class="text-white">VPS Hosting and Streaming Services</h3>
+              <p>We offer Fast and Reliable VPS Hosting Services, as well as HQ streaming accounts.</p>
+              <a href="/services" class="btn btn-light">View Services</a>
+             </div>
+          </div>
+        </div>
+        <% if(me.activationStatus !== "activated"){ %>
+        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
           <div class="card bg-gradient-dark shadow-dark p-3">
             <div class="my-3 text-white">
               <h3 class="text-white">Confirm Status</h3>
               <p>Make sure your activation status changes to "active" before trying to use the bot.</p>
              </div>
           </div>
-         </div>
+        </div>
+        <% } %> 
+        
       </div>
     <% } %>
 
