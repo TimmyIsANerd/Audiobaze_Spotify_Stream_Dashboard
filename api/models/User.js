@@ -162,12 +162,16 @@ without necessarily having a billing card.`
 
     activationStatus:{
       type: 'string',
-      isIn: ['unactivated', 'activated', 'revoked'],
+      isIn: ['unactivated', 'activated', 'revoked','expired'],
       description: 'Status if account is activated for service'
     },
     licenseData:{
       type:'json',
       description: "json file to hold license data"
+    },
+    machineID:{
+      type:'string',
+      description: 'Machine ID'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
