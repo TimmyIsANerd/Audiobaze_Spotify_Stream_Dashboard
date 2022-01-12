@@ -146,6 +146,14 @@
             </li>
             <% } else {%>
             <li class="nav-item">
+              <a class="nav-link text-white " href="/services" id="servicesLink">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">store</i>
+                </div>
+                <span class="nav-link-text ms-1">Store</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link text-white " href="/faq" id="faqLink">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">contact_support</i>
@@ -162,9 +170,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white " href="/contact" id="faqLink">
+              <a class="nav-link text-white " href="https:/t.me/musicprofit4" target="_blank" id="faqLink">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="material-icons opacity-10">help</i>
+                  <i class="material-icons opacity-10">telegram</i>
                 </div>
                 <span class="nav-link-text ms-1">Contact Admin</span>
               </a>
@@ -247,7 +255,7 @@
                     </li>
                     
                     <li class="nav-item">
-                      <a href="/contact" class="nav-link text-muted" target="_blank">Help</a>
+                      <a href="https:/t.me/musicprofit4" class="nav-link text-muted" target="_blank">Help</a>
                     </li>
                     <li class="nav-item">
                       <a href="/faq" class="nav-link pe-0 text-muted" target="_blank">FAQ</a>
@@ -438,6 +446,9 @@
       }
       if(url.includes('keys')){
         licenseKeyLink.classList.add('active');
+      }
+      if(url.includes('service')){
+        servicesLink.classList.add('active');
       }
     </script>
   </body>
