@@ -38,11 +38,18 @@
                 keyStatus:"expired",
             })
             await User.updateOne({
-                activationStatus:"unactivated"
+                emailAddress:this.req.me.emailAddress
+            }).set({
+                activationStatus:"expired"
             })
 
             return res.json({
                 message:'Services Expired'
+            })
+        } else {
+            return res.json({
+                message:'Service Active',
+                expiryDate:data.expiryDate
             })
         }
       }
