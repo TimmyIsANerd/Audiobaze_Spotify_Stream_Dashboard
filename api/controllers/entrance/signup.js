@@ -57,6 +57,8 @@ the account verification message.)`,
   },
 
   fn: async function ({ emailAddress, password, fullName }) {
+    
+
     var newEmailAddress = emailAddress.toLowerCase();
 
     // Build up data for the new user record and save it to the database.
@@ -72,7 +74,7 @@ the account verification message.)`,
           password: await sails.helpers.passwords.hashPassword(password),
           tosAcceptedByIp: this.req.ip,
           accountCreationDate: today,
-          activationStatus:'unactivated'
+          activationStatus: "unactivated"
         },
         sails.config.custom.verifyEmailAddresses
           ? {
