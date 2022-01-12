@@ -17,11 +17,12 @@ module.exports.routes = {
   'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
   'GET /activatelicense': { action: 'view-activatelicense' },
   'GET /activate/licensekey': {action: 'license/check-if-key-is-valid'},
-  'GET /getdata/:emailAddress': {action: 'talktobot'},
+  'GET /access/bot/login': {action: 'talktobot'},
   'GET /faq':                { action:   'view-faq' },
   'GET /legal/terms':        { action:   'legal/view-terms' },
   'GET /legal/privacy':      { action:   'legal/view-privacy' },
   'GET /contact':            { action:   'view-contact' },
+  'GET /services': { action: 'view-services' },
 
   'GET /signup':             { action: 'entrance/view-signup' },
   'GET /email/confirm':      { action: 'entrance/confirm-email' },
