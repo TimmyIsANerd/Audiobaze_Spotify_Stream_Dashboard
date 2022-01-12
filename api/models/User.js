@@ -172,6 +172,11 @@ without necessarily having a billing card.`
     machineID:{
       type:'string',
       description: 'Machine ID'
+    },
+    username:{
+      type:'string',
+      required:true,
+      description:'Username'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

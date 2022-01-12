@@ -56,7 +56,7 @@ and exposed as \`req.me\`.)`,
     },
   },
 
-  fn: async function ({ emailAddress, password, rememberMe, machineId }) {
+  fn: async function ({ emailAddress, password, rememberMe }) {
     const req = this.req;
     const res = this.res;
 

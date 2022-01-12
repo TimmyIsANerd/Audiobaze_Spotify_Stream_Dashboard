@@ -34,6 +34,12 @@ the account verification message.)`,
       example: "Frida Kahlo de Rivera",
       description: "The user's full name.",
     },
+    
+    username:{
+      type:'string',
+      required:true,
+      description:'Username'
+    }
   },
 
   exits: {
@@ -56,7 +62,7 @@ the account verification message.)`,
     },
   },
 
-  fn: async function ({ emailAddress, password, fullName }) {
+  fn: async function ({ emailAddress, password, fullName, username }) {
     
 
     var newEmailAddress = emailAddress.toLowerCase();
@@ -66,9 +72,11 @@ the account verification message.)`,
     var today = new Date();
     var today = today.toLocaleDateString();
 
+    
     var newUserRecord = await User.create(
       _.extend(
         {
+          username,
           fullName,
           emailAddress: newEmailAddress,
           password: await sails.helpers.passwords.hashPassword(password),

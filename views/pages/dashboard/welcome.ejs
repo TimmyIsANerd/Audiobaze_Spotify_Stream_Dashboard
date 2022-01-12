@@ -27,8 +27,8 @@
   <account-notification-banner></account-notification-banner>
   <div class="container pt-5 pb-5">
     <h1 class="mt-1 mb-5">
-      Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %> Audiobaze User <% }
-      %>!
+      Welcome <% if(me.isSuperAdmin === true) {%> Admin<% } else { %>
+      {{ me.username }} <% } %>!
     </h1>
     <% if(me.isSuperAdmin === true) {%>
     <div class="row mt-4" id="adminDashboard">
@@ -97,7 +97,9 @@
           <hr class="dark horizontal my-0" />
           <div class="card-footer p-3">
             <p class="mb-0">
-              <span class="text-success text-sm font-weight-bolder">Current Licenses</span>
+              <span class="text-success text-sm font-weight-bolder"
+                >Current Licenses</span
+              >
               in Use
             </p>
           </div>
@@ -111,7 +113,7 @@
             >
               <i class="material-icons opacity-10">person</i>
             </div>
-            <div class="text-end pt-1" >
+            <div class="text-end pt-1">
               <p class="text-sm mb-0 text-capitalize">Unactivated Users</p>
               <h4 class="mb-0" id="unactivatedUsers"></h4>
             </div>
@@ -129,164 +131,197 @@
 
     <div class="row mt-4">
       <div class="col-xl-4 col-md-4 col-lg-4">
-       <div class="card shadow-dark p-3">
-        <div class="my-2">
-          <h3>Hey Admin</h3>
-          <p>You have access to the entire platform, its license keys and ability to manage its resources. 
-          <br />
-          You can even generate license keys.
-          </p>
-          <a href="/generate-keys" class="btn btn-info shadow-info">Generate 100 Keys!</a>
-         </div>
-       </div>
+        <div class="card shadow-dark p-3">
+          <div class="my-2">
+            <h3>Hey Admin</h3>
+            <p>
+              You have access to the entire platform, its license keys and
+              ability to manage its resources.
+              <br />
+              You can even generate license keys.
+            </p>
+            <a href="/generate-keys" class="btn btn-info shadow-info"
+              >Generate 100 Keys!</a
+            >
+          </div>
+        </div>
       </div>
       <div class="col-xl-4 col-md-4 col-lg-4">
         <div class="card bg-gradient-dark shadow-dark p-2">
           <div class="my-2 text-white">
             <h3 class="text-white">User Management</h3>
-            <p>Only Activated Users will be able to use the streaming bot services.</p>
-            <a href="/list-audiobaze-normalusers" class="btn btn-primary shadow-primary">List Users</a>
-           </div>
+            <p>
+              Only Activated Users will be able to use the streaming bot
+              services.
+            </p>
+            <a
+              href="/list-audiobaze-normalusers"
+              class="btn btn-primary shadow-primary"
+              >List Users</a
+            >
+          </div>
         </div>
       </div>
     </div>
-    <% } %>
-
-    <% if(me.isSuperAdmin === false) { %>
-      <div class="row mt-4 mb-5" id="userdashboard">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute"
-              >
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <div class="text-end pt-3">
-                <p class="text-sm mb-0 text-capitalize">User</p>
-                <h4 class="mb-0 mt-2">{{ me.fullName }}</h4>
-              </div>
+    <% } %> <% if(me.isSuperAdmin === false) { %>
+    <div class="row mt-4 mb-5" id="userdashboard">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">person</i>
             </div>
-            <hr class="dark horizontal my-0" />
-            <div class="card-footer p-3">
-              <p class="mb-0">
-                <span class="text-dark text-sm font-weight-bolder"
-                    >Email </span>
-                {{ me.emailAddress }}
-              </p>
+            <div class="text-end pt-3">
+              <p class="text-sm mb-0 text-capitalize">User</p>
+              <h4 class="mb-0 mt-2">{{ me.fullName }}</h4>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
-              >
-                <i class="material-icons opacity-10">key</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 mt-2 text-capitalize">Activation Status</p>
-                <h4 class="mb-0 text-capitalize">{{me.activationStatus}}</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0" />
-            <div class="card-footer p-3">
-              <p class="mb-0">
-                <span class="text-primary text-sm font-weight-bolder"
-                  >Audiobaze </span
-                >Platform
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
-              ><i class="material-icons opacity-10">calendartoday</i>
-              </div>
-              <div class="text-end pt-1">
-                <% if(me.licenseData){ %>
-                  <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
-                  <% const expirydate = JSON.parse(me.licenseData) %> 
-                  <h4 class="mb-0"><%= expirydate.expiryDate %> </h4>
-                <% } else {%>
-                  <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
-                  <h4 class="mb-0" id="serviceExpiry">...</h4>
-                <% } %> 
-              </div>
-            </div>
-            <hr class="dark horizontal my-0" />
-            <div class="card-footer p-3">
-              <p class="mb-0">
-                <span class="text-success text-sm font-weight-bolder">License</span>
-                Expiry
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute"
-              >
-                <i class="material-icons opacity-10">lock</i>
-              </div>
-              <div class="text-end pt-1" >
-                <p class="text-sm mb-0 text-capitalize">Account Creation Date</p>
-                <h4 class="mb-0">{{me.accountCreationDate}}</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0" />
-            <div class="card-footer p-3">
-              <p class="mb-0">
-                <span class="text-info text-sm font-weight-bolder"><a href="https://t.me/musicprofit4">Contact Admin:</a> </span
-                > Purchase a License
-              </p>
-            </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-dark text-sm font-weight-bolder">Email </span>
+              {{ me.emailAddress }}
+            </p>
           </div>
         </div>
       </div>
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">key</i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 mt-2 text-capitalize">Activation Status</p>
+              <h4 class="mb-0 text-capitalize"><%= me.activationStatus %> </h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-primary text-sm font-weight-bolder"
+                >Audiobaze </span
+              >Platform
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">calendartoday</i>
+            </div>
+            <div class="text-end pt-1">
+              <% if(me.licenseData){ %>
+              <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
+              <% const expirydate = JSON.parse(me.licenseData) %>
+              <h4 class="mb-0"><%= expirydate.expiryDate %></h4>
+              <% } else {%>
+              <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
+              <h4 class="mb-0" id="serviceExpiry">...</h4>
+              <% } %>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-success text-sm font-weight-bolder"
+                >License</span
+              >
+              Expiry
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="material-icons opacity-10">lock</i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Account Creation Date</p>
+              <h4 class="mb-0">{{ me.accountCreationDate }}</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3">
+            <p class="mb-0">
+              <span class="text-info text-sm font-weight-bolder"
+                ><a href="https://t.me/musicprofit4">Contact Admin:</a>
+              </span>
+              Purchase a License
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="row mt-4">
-        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
-         <div class="card shadow-dark p-3">
+    <div class="row mt-4">
+      <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4">
+        <div class="card shadow-dark p-3">
           <div class="my-3">
             <h3>Activate License Key</h3>
-            <p>You will need to activate your license key to use Audiobaze spotify bot services.</p>
+            <p>
+              You will need to activate your license key to use Audiobaze
+              spotify bot services.
+            </p>
             <a href="/activatelicense" class="btn btn-info">Go Activate!</a>
-           </div>
-         </div>
-        </div>
-        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
-          <div class="card bg-gradient-primary shadow-dark p-3">
-            <div class="my-3 text-white">
-              <h3 class="text-white">VPS Hosting and Streaming Services</h3>
-              <p>We offer Fast and Reliable VPS Hosting Services, as well as HQ streaming accounts.</p>
-              <a href="/services" class="btn btn-light">View Services</a>
-             </div>
           </div>
         </div>
-        <% if(me.activationStatus !== "activated"){ %>
-        <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4 ">
-          <div class="card bg-gradient-dark shadow-dark p-3">
-            <div class="my-3 text-white">
-              <h3 class="text-white">Confirm Status</h3>
-              <p>Make sure your activation status changes to "active" before trying to use the bot.</p>
-             </div>
-          </div>
-        </div>
-        <% } %> 
-        
       </div>
-    <% } %>
+      <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4">
+        <div class="card bg-gradient-primary shadow-dark p-3">
+          <div class="my-3 text-white">
+            <h3 class="text-white">VPS Hosting and Streaming Services</h3>
+            <p>
+              We offer Fast and Reliable VPS Hosting Services, as well as HQ
+              streaming accounts.
+            </p>
+            <a href="/services" class="btn btn-light">View Services</a>
+          </div>
+        </div>
+      </div>
+      <% if(me.activationStatus !== "activated"){ %>
+      <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4">
+        <div class="card bg-gradient-dark shadow-dark p-3">
+          <div class="my-3 text-white">
+            <h3 class="text-white">Confirm Status</h3>
+            <p>
+              Make sure your activation status changes to "active" before trying
+              to use the bot.
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %> 
+      <% if(me.activationStatus === "revoked"){ %>
+      <div class="col-xl-4 col-md-4 col-lg-4 mb-xl-0 mb-4">
+        <div class="card bg-gradient-warning shadow-warning p-3">
+          <div class="my-3 text-white">
+            <h3 class="text-white">Access Revoked</h3>
+            <p>
+              Your access to the bot has been revoked because you attempted to login on an extra device.
 
+              Contact Admin to restore Audiobaze Bot service.
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <% } %>
   </div>
   <router-view></router-view>
 </div>
 
-<%- /* Expose locals as `window.SAILS_LOCALS` :: */
-exposeLocalsToBrowser() %>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
