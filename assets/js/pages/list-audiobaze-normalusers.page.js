@@ -64,8 +64,6 @@ parasails.registerPage('list-audiobaze-normalusers', {
                 <a
                   href="/revoke/user/${user.id}"
                   class="text-secondary font-weight-bold text-xs"
-                  data-toggle="tooltip"
-                  data-original-title="Revoke User"
                 >
                   Revoke
                 </a>
