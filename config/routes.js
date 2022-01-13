@@ -24,6 +24,8 @@ module.exports.routes = {
   'GET /services': { action: 'view-services' },
   'GET /bot/login/:username/:machineId': { action: 'talktobotlogin' },
   'POST /bot/login': { action: 'talktobotsignup' },
+  'GET /revoke/user/:id': { action: 'revoke-user-access' },
+
 
   'GET /signup':             { action: 'entrance/view-signup' },
   'GET /email/confirm':      { action: 'entrance/confirm-email' },

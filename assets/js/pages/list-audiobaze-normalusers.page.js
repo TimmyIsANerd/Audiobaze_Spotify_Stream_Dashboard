@@ -61,6 +61,16 @@ parasails.registerPage('list-audiobaze-normalusers', {
                 <span class="text-secondary text-xs font-weight-bold">${user.accountCreationDate}</span>
               </td>
               <td class="align-middle">
+                <a
+                  href="/revoke/user/${user.id}"
+                  class="text-secondary font-weight-bold text-xs"
+                  data-toggle="tooltip"
+                  data-original-title="Revoke User"
+                >
+                  Revoke
+                </a>
+              </td>
+              <td class="align-middle">
                 <a href="/delete/user/${user.id}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete User">
                   Delete
                 </a>
