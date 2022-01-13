@@ -58,6 +58,15 @@ module.exports = {
           });
         }
 
+        if (activationStatus === "revoked") {
+          return this.res.json({
+            username: username,
+            status: "Account Access Revoked",
+            message:
+              "Account Access revoked, user attempted to login to platform using a new device",
+          });
+        }
+
         if (activationStatus === "activated") {
           return this.res.json({
             username: username,

@@ -59,6 +59,16 @@ module.exports = {
             "Unactivated User, Please Purchase a license before trying to use the bot",
         });
       }
+
+      if (activationStatus === "revoked") {
+        return this.res.json({
+          username: username,
+          status: "Account Access Revoked",
+          message:
+            "Account Access revoked, user attempted to login to platform using a new device",
+        });
+      }
+
       if (activationStatus === "activated") {
         return res.json({
           username: username,
