@@ -38,7 +38,8 @@ the account verification message.)`,
     username:{
       type:'string',
       required:true,
-      description:'Username'
+      description:'Username',
+      unique:true
     }
   },
 
@@ -58,8 +59,22 @@ the account verification message.)`,
 
     emailAlreadyInUse: {
       statusCode: 409,
-      description: "The provided email address is already in use.",
+      description: "The provided email address / username is already in use.",
     },
+
+    usernameAlreadyInUse:{
+      statusCode:409,
+      description: "The provided username is already in use"
+    },
+
+    passwordLengthTooSmall:{
+      statusCode:409,
+      description: "Password Length should be at least 6 characters"
+    },
+    usernameLengthTooSmall:{
+      statusCode:409,
+      description: "Username Length should be at least 8 characters"
+    }
   },
 
   fn: async function ({ emailAddress, password, fullName, username }) {
@@ -71,6 +86,16 @@ the account verification message.)`,
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
     var today = new Date();
     var today = today.toLocaleDateString();
+
+    // If Password Length Less than 6 Characts
+    if(password.length < 6){
+      throw "passwordLengthTooSmall"
+    }
+
+    // If Username Length is Less than 8 Characters
+    if(username.length < 8){
+      throw "usernameLengthTooSmall"
+    }
 
     
     var newUserRecord = await User.create(

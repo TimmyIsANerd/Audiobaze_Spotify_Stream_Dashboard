@@ -34,7 +34,9 @@
           <input class="form-check-input" id="terms-agreement" type="checkbox" v-model="formData.agreed">
           <label for="terms-agreement" class="form-check-label" :class="[formErrors.agreed ? 'text-danger' : '']">I have read &amp; agree to the <a target="_blank" href="/terms">terms of service</a>.</label>
         </div>
-        <cloud-error v-if="cloudError==='emailAlreadyInUse'">It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="password/forgot">here</a>.</cloud-error>
+        <cloud-error v-if="cloudError==='emailAlreadyInUse'">It looks like there's already an account with your email address or username. If you forgot your password, you can recover it <a href="password/forgot">here</a>.</cloud-error>
+        <cloud-error v-if="cloudError==='passwordLengthTooSmall'">Password should be at least 6 characters</cloud-error>
+        <cloud-error v-if="cloudError==='usernameLengthTooSmall'">Username should be at least 6 characters</cloud-error>
         <cloud-error v-else-if="cloudError"></cloud-error>
         <div class="form-group">
           <ajax-button type="submit" :syncing="syncing" class="btn-dark btn-lg btn-block">Create account</ajax-button>

@@ -45,7 +45,7 @@ email status until they click the link in the confirmation email.`
       required: true,
       description: 'Securely hashed representation of the user\'s login password.',
       protect: true,
-      example: '2$28a8eabna301089103-13948134nad'
+      example: '2$28a8eabna301089103-13948134nad',
     },
 
     fullName: {
@@ -176,7 +176,8 @@ without necessarily having a billing card.`
     username:{
       type:'string',
       required:true,
-      description:'Username'
+      description:'Username',
+      unique:true
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

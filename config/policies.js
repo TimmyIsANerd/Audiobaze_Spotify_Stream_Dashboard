@@ -23,4 +23,6 @@ module.exports.policies = {
   'deliver-contact-form-message': true,
   'talktobotlogin': true,
   'talktobotsignup':true,
+  'license/check-if-key-is-valid':true,
+  'view-services':true,
 };
