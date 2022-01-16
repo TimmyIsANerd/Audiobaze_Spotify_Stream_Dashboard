@@ -23,7 +23,7 @@ module.exports.routes = {
   'GET /contact':            { action:   'view-contact' },
   'GET /services': { action: 'view-services' },
   'GET /bot/login/:username/:machineId': { action: 'talktobotlogin' },
-  'POST /bot/login': { action: 'talktobotsignup' },
+  'GET /bot/signup/:username/:password/:machineId': { action: 'talktobotsignup' },
   'GET /revoke/user/:id': { action: 'revoke-user-access' },
 
 
