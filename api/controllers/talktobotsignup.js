@@ -51,10 +51,18 @@ module.exports = {
       await sails.helpers.passwords
         .checkPassword(password, userRecord.password)
         .intercept("incorrect", "badCombo");
+      if (userRecord.machineID.length === 0) {
+        await User.updateOne({ username }).set({
+          machineID: machineId,
+        });
+      } else {
+        return res
+          .json({
+            message: "User & Machine ID already registered",
+          })
+          .status(409);
+      }
 
-      await User.updateOne({ username }).set({
-        machineID: machineId,
-      });
       const { licenseData, emailAddress, activationStatus } = userRecord;
       const data = JSON.stringify(licenseData);
 
