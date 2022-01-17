@@ -44,7 +44,8 @@ module.exports = {
 
     if (!userRecord) {
       return this.res.json({
-        status: "Username/Password doesn't exist on database",
+            status:0,
+            status: "Username/Password doesn't exist on database",
       });
     } else {
       // If the password doesn't match, then also exit thru "badCombo".
@@ -58,6 +59,7 @@ module.exports = {
       } else {
         return res
           .json({
+            status:0,
             message: "User & Machine ID already registered",
           })
           .status(409);
@@ -86,12 +88,13 @@ module.exports = {
           status: "License Expired",
           message: "User license expired and access is denied",
           expiryDate: data.expiryDate,
+          status:0
         });
       } else {
         if (activationStatus === "unactivated") {
           return this.res.json({
             username: username,
-            status: "Account Unactivated",
+            status:0,
             message:
               "Unactivated User, Please Purchase a license before trying to use the bot",
           });
@@ -100,7 +103,7 @@ module.exports = {
         if (activationStatus === "revoked") {
           return this.res.json({
             username: username,
-            status: "Account Access Revoked",
+            status:0,
             message:
               "Account Access revoked, user attempted to login to platform using a new device",
           });
@@ -110,7 +113,7 @@ module.exports = {
           return res.json({
             username: username,
             emailAddress: emailAddress,
-            status: "Account Authenticated",
+            status:1,
             message: "Activated User",
             expiryDate: data.expiryDate(),
             activationStatus: activationStatus,

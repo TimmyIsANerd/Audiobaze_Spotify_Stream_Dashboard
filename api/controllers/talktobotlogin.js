@@ -32,6 +32,7 @@ module.exports = {
 
     if (!usernameTest) {
       return this.res.json({
+        status:0,
         message: "Please confirm username and try again",
       });
     } else {
@@ -41,6 +42,7 @@ module.exports = {
         await User.updateOne({ username }).set({ activationStatus: "revoked" });
         return this.res
           .json({
+            status:0,
             message:
               "Machine ID doesn't match database, your account will now be revoked",
           })
@@ -67,7 +69,7 @@ module.exports = {
 
           return res.json({
             username: username,
-            status: "License Expired",
+            status:0,
             message: "User license expired and access is denied",
             expiryDate: data.expiryDate,
           });
@@ -75,7 +77,7 @@ module.exports = {
           if (activationStatus === "unactivated") {
             return this.res.json({
               username: username,
-              status: "Account Unactivated",
+              status:0,
               message:
                 "Unactivated User, Please Purchase a license before trying to use the bot",
             });
@@ -84,7 +86,7 @@ module.exports = {
           if (activationStatus === "revoked") {
             return this.res.json({
               username: username,
-              status: "Account Access Revoked",
+              status:0,
               message:
                 "Account Access revoked, user attempted to login to platform using a new device",
             });
@@ -94,7 +96,7 @@ module.exports = {
             return this.res.json({
               emailAddress: emailAddress,
               username: username,
-              status: "Account Activated",
+              status:1,
               message: "Activated Account, Authentication Successful",
               expiryDate: data.expiryDate(),
             });
