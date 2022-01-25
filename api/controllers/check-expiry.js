@@ -44,7 +44,8 @@
             })
 
             return res.json({
-                message:'Services Expired'
+                message:'Services Expired',
+                expiryDate: data.expiryDate
             })
         } else {
             return res.json({
