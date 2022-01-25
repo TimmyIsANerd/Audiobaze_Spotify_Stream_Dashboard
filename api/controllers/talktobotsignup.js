@@ -44,8 +44,8 @@ module.exports = {
 
     if (!userRecord) {
       return this.res.json({
-            status:0,
-            status: "Username/Password doesn't exist on database",
+        status: 0,
+        status: "Username/Password doesn't exist on database",
       });
     } else {
       // If the password doesn't match, then also exit thru "badCombo".
@@ -59,7 +59,7 @@ module.exports = {
       } else {
         return res
           .json({
-            status:0,
+            status: 0,
             message: "User & Machine ID already registered",
           })
           .status(409);
@@ -71,6 +71,10 @@ module.exports = {
       // First Check Expiry Date
       const today = new Date();
       const todayString = today.toLocaleDateString();
+
+       // Setting up days left
+       const expiryDate = data.expiryDateObj;
+       const daysleftVal = expiryDate.getDate() - today.getDate();
 
       // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
       if (data.expiryDate === todayString) {
@@ -88,24 +92,27 @@ module.exports = {
           status: "License Expired",
           message: "User license expired and access is denied",
           expiryDate: data.expiryDate,
-          status:0
+          status: 0,
+          daysLeft: 0,
         });
       } else {
         if (activationStatus === "unactivated") {
           return this.res.json({
             username: username,
-            status:0,
+            status: 0,
             message:
               "Unactivated User, Please Purchase a license before trying to use the bot",
+              daysLeft: daysleftVal
           });
         }
 
         if (activationStatus === "revoked") {
           return this.res.json({
             username: username,
-            status:0,
+            status: 0,
             message:
               "Account Access revoked, user attempted to login to platform using a new device",
+            daysLeft:0
           });
         }
 
@@ -113,10 +120,11 @@ module.exports = {
           return res.json({
             username: username,
             emailAddress: emailAddress,
-            status:1,
+            status: 1,
             message: "Activated User",
             expiryDate: data.expiryDate(),
             activationStatus: activationStatus,
+            daysLeft: daysleftVal
           });
         }
       }

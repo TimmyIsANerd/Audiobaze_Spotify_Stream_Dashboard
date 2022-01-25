@@ -56,6 +56,11 @@ module.exports = {
         const today = new Date();
         const todayString = today.toLocaleDateString();
 
+        // Setting up days left
+        const expiryDate = data.expiryDateObj;
+        const daysleftVal = expiryDate.getDate() - today.getDate();
+        
+
         // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
         if (data.expiryDate === todayString) {
           await License.updateOne({ username }).set({
@@ -72,6 +77,7 @@ module.exports = {
             status:0,
             message: "User license expired and access is denied",
             expiryDate: data.expiryDate,
+            daysLeft: daysleftVal
           });
         } else {
           if (activationStatus === "unactivated") {
@@ -80,6 +86,7 @@ module.exports = {
               status:0,
               message:
                 "Unactivated User, Please Purchase a license before trying to use the bot",
+                daysLeft: daysleftVal
             });
           }
 
@@ -89,6 +96,7 @@ module.exports = {
               status:0,
               message:
                 "Account Access revoked, user attempted to login to platform using a new device",
+                daysLeft: daysleftVal
             });
           }
 
@@ -99,6 +107,7 @@ module.exports = {
               status:1,
               message: "Activated Account, Authentication Successful",
               expiryDate: data.expiryDate(),
+              daysLeft: daysleftVal
             });
           }
         }
