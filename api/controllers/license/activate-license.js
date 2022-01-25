@@ -45,13 +45,18 @@ module.exports = {
     expiryDate.setDate(activationDate.getDate() + 30);
     const expiryDateString = expiryDate.toLocaleDateString();
 
+    // Calculate Days Left
+    const daysLeft = expiryDate.getDate() - activationDate.getDate();
+
     // Machine ID Slot
     const machineId = [];
 
     const BotData = {
       activationDate: activationDateString,
+      expiryDateObj: new Date(),
       expiryDate: expiryDateString,
       machineId: machineId,
+      daysLeft:daysLeft
     };
 
     const data = JSON.stringify(BotData);
