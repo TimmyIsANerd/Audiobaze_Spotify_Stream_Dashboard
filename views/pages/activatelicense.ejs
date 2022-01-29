@@ -23,15 +23,46 @@
   href="css/material-dashboard.css?v=3.0.0"
   rel="stylesheet"
 />
-<div id="activatelicense" style="margin-bottom: 80vh;" v-cloak>
+<div id="activatelicense" style="margin-bottom: 80vh" v-cloak>
+  <% if(me&&me.emailStatus === 'unconfirmed'){ %>
+  <div class="container">
+    <div class="card col-xl-4 mt-4 shadow-dark p-3">
+      <h5 class="text-warning">
+        Your Email is Unconfirmed, please make sure your email address is
+        confirmed before trying to activate your license key.
+      </h5>
+      <p>
+        Your account access is limited until you click the link sent to
+        <strong>
+          <%= me.emailChangeCandidate ? me.emailChangeCandidate :
+          me.emailAddress%>
+        </strong>
+      </p>
+    </div>
+  </div>
+  <% } else {%>
   <div class="container">
     <div class="card col-xl-4 mt-4 shadow-dark p-3">
       <h3>Activate License</h3>
       <p>Activate your license to have access to the streaming bot.</p>
-      <ajax-form action="activateLicense" :form-data="formData" @submitted="activateLicense()" :form-errors.sync="formErrors" :syncing.sync="syncing" :cloud-error.sync="cloudError"  >
+      <ajax-form
+        action="activateLicense"
+        :form-data="formData"
+        @submitted="activateLicense()"
+        :form-errors.sync="formErrors"
+        :syncing.sync="syncing"
+        :cloud-error.sync="cloudError"
+      >
         <div class="input-group input-group-outline">
           <label class="form-label">Enter License Key...</label>
-          <input type="text" class="form-control" id="license" v-model.trim="formData.licenseKey" required aria-required>
+          <input
+            type="text"
+            class="form-control"
+            id="license"
+            v-model.trim="formData.licenseKey"
+            required
+            aria-required
+          />
           <ajax-button class="btn btn-primary">Activate</ajax-button>
           <div v-if="formErrors.licenseKey">Please enter your license key</div>
         </div>
@@ -45,11 +76,14 @@
           <p class="text-primary">License Key Activation Failed</p>
         </cloud-error>
         <div v-if="cloudSuccess">
-          <p class='text-success'>License Key Activated, You can now use our bot services.</p>
+          <p class="text-success">
+            License Key Activated, You can now use our bot services.
+          </p>
         </div>
       </ajax-form>
     </div>
   </div>
-
+  <% } %>
 </div>
-<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */
+exposeLocalsToBrowser() %>
