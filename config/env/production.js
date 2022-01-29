@@ -376,7 +376,7 @@ module.exports = {
   ***************************************************************************/
   custom: {
     baseUrl: 'https://audiobaze.herokuapp.com/',
-    internalEmailAddress: 'support@example.com',
+    internalEmailAddress: 'audiobazze@gmail.com',
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
     // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',
