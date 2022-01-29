@@ -80,7 +80,7 @@ module.exports = {
     },
 
     ensureAck: {
-      description: 'Whether to wait for acknowledgement (to hear back) that the email was successfully sent (or at least queued for sending) before returning.',
+      description: 'Whether to wait for acknowledgement (to hear back) that the email was successfully sent (or at least queued for sending) before returnng.',
       extendedDescription: 'Otherwise by default, this returns immediately and delivers the request to deliver this email in the background.',
       type: 'boolean',
       defaultsTo: false
@@ -207,35 +207,6 @@ module.exports = {
         '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'
       );
     } else {
-      // Otherwise, we'll check that all required Mailgun credentials are set up
-      // and, if so, continue to actually send the email.
-
-      if (!sails.config.custom.sendgridSecret) {
-        throw new Error(
-          'Cannot deliver email to "'+to+'" because:\n'+
-          (()=>{
-            let problems = [];
-            if (!sails.config.custom.sendgridSecret) {
-              problems.push(' • Sendgrid secret is missing from this app\'s configuration (`sails.config.custom.sendgridSecret`)');
-            }
-            return problems.join('\n');
-          })()+
-          '\n'+
-          'To resolve these configuration issues, add the missing config variables to\n'+
-          '\`config/custom.js\`-- or in staging/production, set them up as system\n'+
-          'environment vars.  (If you don\'t have a Sendgrid secret, you can\n'+
-          'sign up for free at https://sendgrid.com to receive credentials.)\n'+
-          '\n'+
-          '> Note that, for convenience during development, there is another alternative:\n'+
-          '> In lieu of setting up real Sendgrid credentials, you can "fake" email\n'+
-          '> delivery by using any email address that ends in "@example.com".  This will\n'+
-          '> write automated emails to your logs rather than actually sending them.\n'+
-          '> (To simulate clicking on a link from an email, just copy and paste the link\n'+
-          '> from the terminal output into your browser.)\n'+
-          '\n'+
-          '[?] If you\'re unsure, visit https://sailsjs.com/support'
-        );
-      }
 
       var subjectLinePrefix = sails.config.environment === 'production' ? '' : sails.config.environment === 'staging' ? '[FROM STAGING] ' : '[FROM LOCALHOST] ';
       var messageData = {
@@ -249,7 +220,8 @@ module.exports = {
         attachments
       };
 
-      var deferred = sails.helpers.sendgrid.sendHtmlEmail.with(messageData);
+      var deferred = sails.helpers.sendgrid.sendHtmlEmail.with(messageData)
+
       if (ensureAck) {
         await deferred;
       } else {
