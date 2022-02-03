@@ -25,4 +25,5 @@ module.exports.policies = {
   'talktobotsignup':true,
   'license/check-if-key-is-valid':true,
   'view-services':true,
+  'view-blog':true,
 };
