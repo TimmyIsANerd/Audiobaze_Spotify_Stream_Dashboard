@@ -84,7 +84,7 @@ module.exports = {
 
         const activationDate = new Date(newTodayFormat);
         const expiryDate = new Date(newexpdate);
-        const diffTime = Math.abs(expiryDate - activationDate);
+        const diffTime = Math.abs(activationDate - expiryDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
