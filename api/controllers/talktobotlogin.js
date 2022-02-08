@@ -87,6 +87,16 @@ module.exports = {
         const diffTime = Math.abs(activationDate - expiryDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+        if(diffDays === 0){
+          return this.res.json({
+            username: username,
+            status: 0,
+            message: "User license expired and access is denied",
+            expiryDate: data.expiryDate,
+            daysLeft: 0,
+          })
+        }
+
         // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
         if (data.expiryDate === todayString) {
           await License.updateOne({ username }).set({
