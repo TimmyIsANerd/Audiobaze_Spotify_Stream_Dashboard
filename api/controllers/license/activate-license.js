@@ -31,6 +31,9 @@ module.exports = {
     used: {
       descriptiion: "Used License Key",
     },
+    alreadyActivated:{
+      description: "License already activated"
+    }
   },
 
   fn: async function ({ licenseKey }) {
@@ -45,21 +48,23 @@ module.exports = {
     expiryDate.setDate(activationDate.getDate() + 30);
     const expiryDateString = expiryDate.toLocaleDateString();
 
-    // Calculate Days Left
-    const daysLeft = expiryDate.getDate() - activationDate.getDate();
-
     // Machine ID Slot
     const machineId = [];
 
     const BotData = {
       activationDate: activationDateString,
-      expiryDateObj: new Date(),
       expiryDate: expiryDateString,
       machineId: machineId,
-      daysLeft:daysLeft
+      daysLeft: 30
     };
 
     const data = JSON.stringify(BotData);
+
+    const userRecord = await User.findOne({id:this.req.id});
+
+    if(userRecord.activationStatus === 'activated'){
+      throw "alreadyActivated"
+    }
 
     const licenseRecord = await License.findOne({
       licenseKey,

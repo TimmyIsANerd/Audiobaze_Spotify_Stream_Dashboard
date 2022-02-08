@@ -150,7 +150,7 @@ module.exports = {
     ***************************************************************************/
     cors: {
       allowOrigins: [
-        'https://audiobaze.netlify.app',
+        'https://audiobaze.net',
       ]
     },
 
@@ -375,7 +375,7 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    baseUrl: 'https://audiobaze.herokuapp.com/',
+    baseUrl: 'https://audiobaze.net',
     internalEmailAddress: 'audiobazze@gmail.com',
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
