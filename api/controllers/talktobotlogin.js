@@ -67,11 +67,12 @@ module.exports = {
           });
         }
 
-        // First Check Expiry Date
+        // Check Expiry Date
+        //Check Expiry date using today's date
         const today = new Date();
         const todayString = today.toLocaleDateString();
         // Convert dates to mm dd yyyy format
-        var todaydatearr = todayString.split("/");
+        var todaydatearr = data.activationDate.split("/");
         var newTodayFormat =
           todaydatearr[1] + "/" + todaydatearr[0] + "/" + todaydatearr[2];
 
