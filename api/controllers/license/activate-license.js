@@ -60,12 +60,6 @@ module.exports = {
 
     const data = JSON.stringify(BotData);
 
-    const userRecord = await User.findOne({id:this.req.id});
-
-    if(userRecord.activationStatus === 'activated'){
-      throw "alreadyActivated"
-    }
-
     const licenseRecord = await License.findOne({
       licenseKey,
       keyStatus: "valid",

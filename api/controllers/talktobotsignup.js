@@ -82,12 +82,12 @@ module.exports = {
       var newTodayFormat = todaydatearr[1] + '/' + todaydatearr[0] + '/' + todaydatearr[2];
 
       // Caculating Days Left
-      const activationDate = new Date(newTodayFormat);
       // Convert Expiry Date to mm dd yyyy format
       var expdate = data.expiryDate;
       var expdatearr = expdate.split("/");
       var newexpdate = expdatearr[1] + '/' + expdatearr[0] + '/' + expdatearr[2];
-
+      
+      const activationDate = new Date(newTodayFormat);
       const expiryDate = new Date(newexpdate);
       const diffTime = Math.abs(expiryDate - activationDate);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
