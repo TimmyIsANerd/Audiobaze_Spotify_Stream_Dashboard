@@ -58,7 +58,6 @@ module.exports = {
         const { licenseData, activationStatus, username, emailAddress } =
           userRecord;
         const data = JSON.parse(licenseData);
-        sails.log.info(data);
         if (data.expiryDate === undefined) {
           return this.res.json({
             status: 0,
@@ -67,35 +66,49 @@ module.exports = {
           });
         }
 
-        // Check Expiry Date
+        function calculateDaysLeft(date1, date2) {
+          const date1utc = Date.UTC(
+            date1.getFullYear(),
+            date1.getMonth(),
+            date1.getDate()
+          );
+          const date2utc = Date.UTC(
+            date2.getFullYear(),
+            date2.getMonth(),
+            date2.getDate()
+          );
+          day = 1000 * 60 * 60 * 24;
+          return (date2utc - date1utc) / day;
+        }
+
         //Check Expiry date using today's date
         const today = new Date();
         const todayString = today.toLocaleDateString();
-        // Convert dates to mm dd yyyy format
+        // Convert dates to yyyy-mm-dd format
         var todaydatearr = data.activationDate.split("/");
-        var newTodayFormat =
-          todaydatearr[1] + "/" + todaydatearr[0] + "/" + todaydatearr[2];
+        var newTodayFormat = todaydatearr[2] + "/" + todaydatearr[1] + "/" + todaydatearr[0];
+        var re = "/";
+        var newTodayFormat = newTodayFormat.replace(re,'-');
 
-        // Calculating Days Left
-        // Convert Expiry Date to mm dd yyyy format
+        // Convert Expiry Date to yyyy-mm-dd format
         var expdate = data.expiryDate;
         var expdatearr = expdate.split("/");
-        var newexpdate =
-          expdatearr[1] + "/" + expdatearr[0] + "/" + expdatearr[2];
+        var newexpdate = expdatearr[2] + "/" + expdatearr[1] + "/" + expdatearr[0];
+        var newexpdate = newexpdate.replace(re,'-');
 
-        const activationDate = new Date(newTodayFormat);
-        const expiryDate = new Date(newexpdate);
-        const diffTime = Math.abs(activationDate - expiryDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        var date1 = new Date(newTodayFormat);
+        var date2 = new Date(newexpdate);
+        const diffDays = calculateDaysLeft(date1,date2);
+        sails.log.info(diffDays)
 
-        if(diffDays === 0){
+        if (diffDays === 0) {
           return this.res.json({
             username: username,
             status: 0,
             message: "User license expired and access is denied",
             expiryDate: data.expiryDate,
             daysLeft: 0,
-          })
+          });
         }
 
         // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
