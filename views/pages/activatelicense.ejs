@@ -75,6 +75,9 @@
         <cloud-error v-if="cloudError==='failure'">
           <p class="text-primary">License Key Activation Failed</p>
         </cloud-error>
+        <cloud-error v-if="cloudError==='alreadyActivated'">
+          <p class="text-primary">License already activated</p>
+        </cloud-error>
         <div v-if="cloudSuccess">
           <p class="text-success">
             License Key Activated, You can now use our bot services.

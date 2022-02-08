@@ -52,29 +52,45 @@ module.exports = {
       await sails.helpers.passwords
         .checkPassword(password, userRecord.password)
         .intercept("incorrect", "badCombo");
-      if (userRecord.machineID.length === 0) {
+      if (userRecord.machineID === "") {
         await User.updateOne({ username }).set({
           machineID: machineId,
         });
-      } else {
-        return res
-          .json({
-            status: 0,
-            message: "User & Machine ID already registered",
-          })
-          .status(409);
       }
-
+      // } else {
+      //   return res
+      //     .json({
+      //       status: 0,
+      //       message: "User & Machine ID already registered",
+      //     })
+      //     .status(409);
+      // }
+        
       const { licenseData, emailAddress, activationStatus } = userRecord;
-      const data = JSON.stringify(licenseData);
-
+      const data = JSON.parse(licenseData);
+      if(data.expiryDate === undefined){
+        return this.res.json({
+          status:0,
+          message:"This account is unactivated, Please create an account on https://audiobaze.net and activate it with a license key"
+        })
+      }
       // First Check Expiry Date
       const today = new Date();
       const todayString = today.toLocaleDateString();
+      // Convert dates to mm dd yyyy format
+      var todaydatearr = todayString.split('/');
+      var newTodayFormat = todaydatearr[1] + '/' + todaydatearr[0] + '/' + todaydatearr[2];
 
-       // Setting up days left
-       const expiryDate = data.expiryDateObj;
-       const daysleftVal = expiryDate.getDate() - today.getDate();
+      // Caculating Days Left
+      const activationDate = new Date(newTodayFormat);
+      // Convert Expiry Date to mm dd yyyy format
+      var expdate = data.expiryDate;
+      var expdatearr = expdate.split("/");
+      var newexpdate = expdatearr[1] + '/' + expdatearr[0] + '/' + expdatearr[2];
+
+      const expiryDate = new Date(newexpdate);
+      const diffTime = Math.abs(expiryDate - activationDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
       // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
       if (data.expiryDate === todayString) {
@@ -102,7 +118,7 @@ module.exports = {
             status: 0,
             message:
               "Unactivated User, Please Purchase a license before trying to use the bot",
-              daysLeft: daysleftVal
+              daysLeft: 0
           });
         }
 
@@ -122,9 +138,9 @@ module.exports = {
             emailAddress: emailAddress,
             status: 1,
             message: "Activated User",
-            expiryDate: data.expiryDate(),
+            expiryDate: data.expiryDate,
             activationStatus: activationStatus,
-            daysLeft: daysleftVal
+            daysLeft: diffDays
           });
         }
       }
