@@ -170,8 +170,8 @@ without necessarily having a billing card.`
       description: "json file to hold license data"
     },
     machineID:{
-      type:'string',
-      description: 'Machine ID'
+      type:'json',
+      description: 'Object holding a maximum of 4 Machine IDs'
     },
     username:{
       type:'string',
