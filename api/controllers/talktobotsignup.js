@@ -52,11 +52,14 @@ module.exports = {
       await sails.helpers.passwords
         .checkPassword(password, userRecord.password)
         .intercept("incorrect", "badCombo");
-      if (userRecord.machineID === "") {
+
+      if (userRecord.machineID.length === 0) {
+        let idSlots = []
         await User.updateOne({ username }).set({
-          machineID: machineId,
+          machineID: idSlots.push(machineId),
         });
       }
+
       // } else {
       //   return res
       //     .json({
