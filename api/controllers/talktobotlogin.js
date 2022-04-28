@@ -36,128 +36,148 @@ module.exports = {
         message: "Please confirm username and try again",
       });
     } else {
+      let idSlots = usernameTest.machineID.idSlots;
       // If Machine ID record wasn't saved
-      if (usernameTest.machineID === "") {
+      if (usernameTest.machineID.idSlots.length === 0) {
         return this.res.json({
           status: 0,
-          message: "Machine ID not found on Database, ",
+          message: "No Machine ID in Database",
         });
       }
-      const userRecord = await User.findOne({ machineID: machineId });
+      for (let i = 0; i < idSlots.length; i++) {
+        if (idSlots[i] === machineId) {
+          // If Machine ID is in the database, return success
+          let userRecord = usernameTest;
+          // Collect its Data
+          const { licenseData, activationStatus, username, emailAddress } =
+            userRecord;
+          const data = JSON.parse(licenseData);
+          if (data.expiryDate === undefined) {
+            return this.res.json({
+              status: 0,
+              message:
+                "This account is unactivated, Please create an account on https://audiobaze.net",
+            });
+          }
 
-      if (!userRecord) {
-        await User.updateOne({ username }).set({ activationStatus: "revoked" });
-        return this.res
-          .json({
-            status: 0,
-            message:
-              "Machine ID doesn't match database, your account will now be revoked",
-          })
-          .status(400);
-      } else {
-        const { licenseData, activationStatus, username, emailAddress } =
-          userRecord;
-        const data = JSON.parse(licenseData);
-        if (data.expiryDate === undefined) {
+          function calculateDaysLeft(date1, date2) {
+            const date1utc = Date.UTC(
+              date1.getFullYear(),
+              date1.getMonth(),
+              date1.getDate()
+            );
+            const date2utc = Date.UTC(
+              date2.getFullYear(),
+              date2.getMonth(),
+              date2.getDate()
+            );
+            day = 1000 * 60 * 60 * 24;
+            return (date2utc - date1utc) / day;
+          }
+
+          //Check Expiry date using today's date
+          const today = new Date();
+          const todayString = today.toLocaleDateString();
+          // Convert dates to yyyy-mm-dd format
+          var todaydatearr = data.activationDate.split("/");
+          var newTodayFormat =
+            todaydatearr[2] + "/" + todaydatearr[1] + "/" + todaydatearr[0];
+          var re = "/";
+          var newTodayFormat = newTodayFormat.replace(re, "-");
+
+          // Convert Expiry Date to yyyy-mm-dd format
+          var expdate = data.expiryDate;
+          var expdatearr = expdate.split("/");
+          var newexpdate =
+            expdatearr[2] + "/" + expdatearr[1] + "/" + expdatearr[0];
+          var newexpdate = newexpdate.replace(re, "-");
+
+          var date1 = new Date(newTodayFormat);
+          var date2 = new Date(newexpdate);
+          const diffDays = calculateDaysLeft(date1, date2);
+          sails.log.info(diffDays);
+
+          if (diffDays === 0) {
+            return this.res.json({
+              username: username,
+              status: 0,
+              message: "User license expired and access is denied",
+              expiryDate: data.expiryDate,
+              daysLeft: 0,
+            });
+          }
+
+          // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
+          if (data.expiryDate === todayString) {
+            await License.updateOne({ username }).set({
+              keyStatus: "expired",
+            });
+            await User.updateOne({
+              username,
+            }).set({
+              activationStatus: "expired",
+            });
+
+            return res.json({
+              username: username,
+              status: 0,
+              message: "User license expired and access is denied",
+              expiryDate: data.expiryDate,
+              daysLeft: 0,
+            });
+          } else {
+            if (activationStatus === "unactivated") {
+              return this.res.json({
+                username: username,
+                status: 0,
+                message:
+                  "Unactivated User, Please Purchase a license before trying to use the bot",
+                daysLeft: 0,
+              });
+            }
+
+            if (activationStatus === "revoked") {
+              return this.res.json({
+                username: username,
+                status: 0,
+                message:
+                  "Account Access revoked, user attempted to login to platform using a new device",
+                daysLeft: 0,
+              });
+            }
+
+            if (activationStatus === "activated") {
+              return this.res.json({
+                emailAddress: emailAddress,
+                username: username,
+                status: 1,
+                message: "Activated Account, Authentication Successful",
+                expiryDate: data.expiryDate,
+                daysLeft: diffDays,
+              });
+            }
+          }
           return this.res.json({
-            status: 0,
-            message:
-              "This account is unactivated, Please create an account on https://audiobaze.net",
-          });
-        }
-
-        function calculateDaysLeft(date1, date2) {
-          const date1utc = Date.UTC(
-            date1.getFullYear(),
-            date1.getMonth(),
-            date1.getDate()
-          );
-          const date2utc = Date.UTC(
-            date2.getFullYear(),
-            date2.getMonth(),
-            date2.getDate()
-          );
-          day = 1000 * 60 * 60 * 24;
-          return (date2utc - date1utc) / day;
-        }
-
-        //Check Expiry date using today's date
-        const today = new Date();
-        const todayString = today.toLocaleDateString();
-        // Convert dates to yyyy-mm-dd format
-        var todaydatearr = data.activationDate.split("/");
-        var newTodayFormat = todaydatearr[2] + "/" + todaydatearr[1] + "/" + todaydatearr[0];
-        var re = "/";
-        var newTodayFormat = newTodayFormat.replace(re,'-');
-
-        // Convert Expiry Date to yyyy-mm-dd format
-        var expdate = data.expiryDate;
-        var expdatearr = expdate.split("/");
-        var newexpdate = expdatearr[2] + "/" + expdatearr[1] + "/" + expdatearr[0];
-        var newexpdate = newexpdate.replace(re,'-');
-
-        var date1 = new Date(newTodayFormat);
-        var date2 = new Date(newexpdate);
-        const diffDays = calculateDaysLeft(date1,date2);
-        sails.log.info(diffDays)
-
-        if (diffDays === 0) {
-          return this.res.json({
-            username: username,
-            status: 0,
-            message: "User license expired and access is denied",
-            expiryDate: data.expiryDate,
-            daysLeft: 0,
-          });
-        }
-
-        // If Today is the Expiry Date, Set User to Unactivated and set License Key to Expired
-        if (data.expiryDate === todayString) {
-          await License.updateOne({ username }).set({
-            keyStatus: "expired",
-          });
-          await User.updateOne({
-            username,
-          }).set({
-            activationStatus: "expired",
-          });
-
-          return res.json({
-            username: username,
-            status: 0,
-            message: "User license expired and access is denied",
-            expiryDate: data.expiryDate,
-            daysLeft: 0,
+            status: 1,
+            message: `Machine ID ${machineId} is valid`,
           });
         } else {
-          if (activationStatus === "unactivated") {
+          if (idSlots.length < 4) {
+            // add id to slots
+            await User.updateOne({username}).set({
+              machineID: [...idSlots,deviceId],
+            })
             return this.res.json({
-              username: username,
-              status: 0,
-              message:
-                "Unactivated User, Please Purchase a license before trying to use the bot",
-              daysLeft: 0,
+              status:1,
+              message:`Machine ID ${machineId} is a new device`,
+            })
+          } else {
+            await User.updateOne({ username }).set({
+              activationStatus: "revoked",
             });
-          }
-
-          if (activationStatus === "revoked") {
             return this.res.json({
-              username: username,
               status: 0,
-              message:
-                "Account Access revoked, user attempted to login to platform using a new device",
-              daysLeft: 0,
-            });
-          }
-
-          if (activationStatus === "activated") {
-            return this.res.json({
-              emailAddress: emailAddress,
-              username: username,
-              status: 1,
-              message: "Activated Account, Authentication Successful",
-              expiryDate: data.expiryDate,
-              daysLeft: diffDays,
+              message: "You tried to login in with more than 4 devices, access will now be revoked",
             });
           }
         }
