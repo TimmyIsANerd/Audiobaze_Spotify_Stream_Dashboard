@@ -54,10 +54,14 @@ module.exports = {
         .intercept("incorrect", "badCombo");
 
       if (userRecord.machineID.length === 0) {
-        let idSlots = []
         await User.updateOne({ username }).set({
-          machineID: idSlots.push(machineId),
+          machineID: [machineId],
         });
+      } else {
+        return this.res.json({
+          status:0,
+          message:"Failed attempt to sign up multiple times, please login instead"
+        })
       }
 
       // } else {
@@ -71,7 +75,7 @@ module.exports = {
         
       const { licenseData, emailAddress, activationStatus } = userRecord;
       const data = JSON.parse(licenseData);
-      if(data.expiryDate === undefined){
+      if(!data.expiryDate){
         return this.res.json({
           status:0,
           message:"This account is unactivated, Please create an account on https://audiobaze.net and activate it with a license key"
@@ -148,7 +152,7 @@ module.exports = {
             username: username,
             status: 0,
             message:
-              "Account Access revoked, user attempted to login to platform using a new device",
+              "Account Access revoked, user attempted to login to platform using revoked account",
             daysLeft:0
           });
         }
