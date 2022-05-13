@@ -171,13 +171,18 @@ without necessarily having a billing card.`
     },
     machineID:{
       type:'json',
-      description: 'Object holding a maximum of 4 Machine IDs'
+      description: 'Object holding Machine IDs'
     },
     username:{
       type:'string',
       required:true,
       description:'Username',
       unique:true
+    },
+    machineIdLimit:{
+      type:'number',
+      defaultsTo:'4',
+      description:'Maximum Number of logged in Devices'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
