@@ -75,7 +75,9 @@ module.exports = {
       });
       await User.updateOne({id:this.req.me.id}).set({
         activationStatus:'activated',
-        licenseData:data
+        licenseData:data,
+        daysLeft:30,
+        machineId:[]
       })
     }
   },
