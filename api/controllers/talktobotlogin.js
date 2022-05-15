@@ -49,7 +49,8 @@ module.exports = {
             // If Machine ID is in the database, return success
             let userRecord = usernameTest;
             // Collect its Data
-            const { licenseData, activationStatus, username, emailAddress,machineIdLimit } = userRecord;
+            const { licenseData, activationStatus, username, emailAddress } =
+              userRecord;
 
             const data = JSON.parse(licenseData);
             if (data.expiryDate === undefined || data.expiryDate === null) {
@@ -158,12 +159,15 @@ module.exports = {
               }
             }
           } else {
+            let userRecord = usernameTest;
+            const { machineIdLimit } = userRecord;
+            // Check Limit
             const limit = machineIdLimit + 1;
             if (idSlots.length < limit) {
               const slotCheck = await User.findOne({
-                machineID:[machineId]
-              })
-              if(!slotCheck){
+                machineID: [machineId],
+              });
+              if (!slotCheck) {
                 // add id to slots
                 await User.updateOne({ username }).set({
                   machineID: [...idSlots, machineId],
