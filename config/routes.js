@@ -58,7 +58,7 @@ module.exports.routes = {
   "GET /services": {
     action: "view-services",
     locals: {
-      page: "Our Services",
+      pageTitle: "Our Services",
     },
   },
   "GET /bot/login/:username/:machineId": { action: "talktobotlogin" },
@@ -183,7 +183,13 @@ module.exports.routes = {
     action: "observe-my-session",
     hasSocketFeatures: true,
   },
-  "GET /edit-user-profile/:profileId": {
-    action: "edit-user-profile",
+  "GET /find-user/:profileId": {
+    action: "find-user",
   },
+  "GET /activate-user/:userId/:NoOfDays": {
+    action: "timed-activation",
+  },
+  "GET /machine/limit/:id/:limit":{
+    action : "set-machine-limit"
+  }
 };
