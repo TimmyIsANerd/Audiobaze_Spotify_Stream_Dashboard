@@ -181,7 +181,7 @@ without necessarily having a billing card.`
     },
     machineIdLimit:{
       type:'number',
-      defaultsTo:'4',
+      defaultsTo:4,
       description:'Maximum Number of logged in Devices'
     }
 
