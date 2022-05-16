@@ -170,14 +170,19 @@ without necessarily having a billing card.`
       description: "json file to hold license data"
     },
     machineID:{
-      type:'string',
-      description: 'Machine ID'
+      type:'json',
+      description: 'Object holding Machine IDs'
     },
     username:{
       type:'string',
       required:true,
       description:'Username',
       unique:true
+    },
+    machineIdLimit:{
+      type:'number',
+      defaultsTo:4,
+      description:'Maximum Number of logged in Devices'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

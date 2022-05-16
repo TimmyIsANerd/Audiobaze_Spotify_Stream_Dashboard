@@ -107,7 +107,8 @@ the account verification message.)`,
           password: await sails.helpers.passwords.hashPassword(password),
           tosAcceptedByIp: this.req.ip,
           accountCreationDate: today,
-          activationStatus: "unactivated"
+          activationStatus: "unactivated",
+          machineID:[]
         },
         sails.config.custom.verifyEmailAddresses
           ? {

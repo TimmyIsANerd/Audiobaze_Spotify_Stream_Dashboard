@@ -5,19 +5,17 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
- module.exports = {
-  fn:async function(){
-    const {id} = this.req.params;
+module.exports = {
+  fn: async function () {
+    const { id } = this.req.params;
 
     const res = this.res;
 
-    const deleteUser = await User.destroyOne({id}).then(res =>{
-      res.redirect('list-audiobaze-normalusers');
-    }).catch(error =>{
-      return res.json({
-        message:'failed to delete user'
-      })
-    })
-  }
+    const deleteUser = await User.destroyOne({ id })
+    if(!deleteUser){
+      return res.status(500).redirect("/list-audiobaze-normalusers");
+    } else {
+      return res.status(200).redirect("/list-audiobaze-normalusers");
+    }
+  },
 };
-
