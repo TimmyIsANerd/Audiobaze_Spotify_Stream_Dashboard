@@ -15,7 +15,7 @@ module.exports = {
       await User.updateOne({ id }).set({
         machineIdLimit: maxDevices,
       });
-      return res.status(500).redirect("/list-audiobaze-normalusers");
+      return res.status(200).redirect("/list-audiobaze-normalusers");
     }
   },
 };
