@@ -48,17 +48,6 @@ module.exports = {
     expiryDate.setDate(activationDate.getDate() + 30);
     const expiryDateString = expiryDate.toLocaleDateString();
 
-    // Machine ID Slot
-    const machineId = [];
-
-    const BotData = {
-      activationDate: activationDateString,
-      expiryDate: expiryDateString,
-      machineId: machineId,
-      daysLeft: 30
-    };
-
-    const data = JSON.stringify(BotData);
 
     const licenseRecord = await License.findOne({
       licenseKey,
@@ -75,9 +64,10 @@ module.exports = {
       });
       await User.updateOne({id:this.req.me.id}).set({
         activationStatus:'activated',
-        licenseData:data,
+        activationDate:activationDateString,
         daysLeft:30,
-        machineId:[]
+        expiryDate:expiryDateString,
+        machineID:[]
       })
     }
   },
