@@ -23,22 +23,12 @@ module.exports = {
     if (!userRecord) {
       throw "failed";
     } else {
-      const { licenseData } = userRecord;
-
-      const cloneData = JSON.parse(licenseData);
-
-      // Change Expiry Date to Todays Date
-      var today = new Date();
-      var today = today.toLocaleDateString();
-      cloneData.expiryDate = today;
-      cloneData.daysLeft = 0;
-
-      const newDB = JSON.stringify(cloneData);
-
+      
       await User.updateOne({ id }).set({
         activationStatus: "revoked",
         daysLeft: 0,
-        licenseData:newDB,
+        expiryDate:today,
+        activationDate:today
       });
       return res.redirect("/list-audiobaze-normalusers");
     }

@@ -33,41 +33,12 @@ module.exports = {
         message: "Failed to Find User",
       });
     } else {
-      const { licenseData } = userRecord;
-      if (licenseData) {
-        const cloneData = JSON.parse(licenseData);
-        sails.log(cloneData);
-        cloneData.activationDate = activationDateString;
-        cloneData.expiryDate = expiryDateString;
-        cloneData.daysLeft = days;
-
-        const newDBEntry = JSON.stringify(cloneData);
-
-        await User.updateOne({ id: userId }).set({
-          activationStatus: "activated",
-          licenseData: newDBEntry,
-          daysLeft: days,
-          machineId: [],
-        });
-      } else {
-        // Machine ID Slot
-        const machineId = [];
-
-        const dbEntry = {
-          activationDate: activationDateString,
-          expiryDate: expiryDateString,
-          machineId: machineId,
-          daysLeft: days
-        };
-
-        const data = JSON.stringify(dbEntry);
-        await User.updateOne({ id: userId }).set({
-          activationStatus: "activated",
-          licenseData: data,
-          daysLeft: days,
-          machineId: [],
-        });
-      }
+      await User.updateOne({id:userId}).set({
+        activationStatus:'activated',
+        activationDate:activationDateString,
+        expiryDate:expiryDateString,
+        daysLeft:NoOfDays,
+      })
       return res.status(200).redirect("/list-audiobaze-normalusers");
     }
   },

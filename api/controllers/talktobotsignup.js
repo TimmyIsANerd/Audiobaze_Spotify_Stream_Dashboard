@@ -53,7 +53,7 @@ module.exports = {
         .checkPassword(password, userRecord.password)
         .intercept("incorrect", "badCombo");
 
-      if (userRecord.machineID.length === 0) {
+      if (userRecord.machineID === []) {
         await User.updateOne({ username }).set({
           machineID: [machineId],
         });

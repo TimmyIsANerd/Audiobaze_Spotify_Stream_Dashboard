@@ -219,10 +219,9 @@
               <i class="material-icons opacity-10">calendartoday</i>
             </div>
             <div class="text-end pt-1">
-              <% if(me.licenseData){ %>
+              <% if(me.expiryDate){ %>
               <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
-              <% const expirydate = JSON.parse(me.licenseData) %>
-              <h4 class="mb-0"><%= expirydate.expiryDate %></h4>
+              <h4 class="mb-0"><%= me.expiryDate %></h4>
               <% } else {%>
               <p class="text-sm mb-0 text-capitalize">Service Expiry Date</p>
               <h4 class="mb-0" id="serviceExpiry">...</h4>
@@ -310,7 +309,7 @@
           <div class="my-3 text-white">
             <h3 class="text-white">Access Revoked</h3>
             <p>
-              Your access to the bot has been revoked because you attempted to login on an extra device.
+              Your access to the bot has been revoked for violating the platform's policies.
 
               Contact Admin to restore Audiobaze Bot service.
             </p>

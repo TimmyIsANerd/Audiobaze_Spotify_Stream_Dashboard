@@ -66,8 +66,7 @@ module.exports = {
         activationStatus:'activated',
         activationDate:activationDateString,
         daysLeft:30,
-        expiryDate:expiryDateString,
-        machineID:[]
+        expiryDate:expiryDateString
       })
     }
   },
