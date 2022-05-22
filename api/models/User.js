@@ -183,18 +183,19 @@ without necessarily having a billing card.`
       type:'number',
       defaultsTo:4,
       description:'Maximum Number of logged in Devices'
+    },
+    activationDate:{
+      type:'string',
+      description:'Service Activation Data'
+    },
+    expiryDate:{
+      type:'string',
+      description:'Service Expiry Date'
+    },
+    daysLeft:{
+      type:'number',
+      description:'Number of Days Left till Deactivation'
     }
-
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    // n/a
-
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // n/a
-
   },
 
 
