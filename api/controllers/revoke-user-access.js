@@ -23,6 +23,9 @@ module.exports = {
     if (!userRecord) {
       throw "failed";
     } else {
+
+      var today = new Date();
+      var today = today.toLocaleDateString();
       
       await User.updateOne({ id }).set({
         activationStatus: "revoked",
