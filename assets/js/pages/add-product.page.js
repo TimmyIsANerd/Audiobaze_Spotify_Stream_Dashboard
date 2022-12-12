@@ -1,4 +1,4 @@
-parasails.registerPage("activatelicense", {
+parasails.registerPage("add-product", {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
@@ -19,7 +19,11 @@ parasails.registerPage("activatelicense", {
     cloudSuccess: false,
     // Form Rules
     formRules: {
-      licenseKey: { required: true },
+      productName: { required: true },
+      productDescription: { required: true },
+      productType: { required: true },
+      price: { required: true },
+      productNote: { required: true },
     },
     // Server error state for the form
     cloudError: "",
@@ -39,9 +43,11 @@ parasails.registerPage("activatelicense", {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    activateLicense: async function () {
+    addProduct: async function () {
       this.cloudSuccess = true;
-      window.location = "/";
+      setTimeout(() => {
+        window.location = "/services";
+      }, 2000);
     },
   },
 });

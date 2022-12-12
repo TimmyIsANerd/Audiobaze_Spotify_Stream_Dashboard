@@ -1,0 +1,99 @@
+<!--     Fonts and icons     -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+/>
+<!-- Nucleo Icons -->
+<link href="css/nucleo-icons.css" rel="stylesheet" />
+<link href="css/nucleo-svg.css" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<script
+  src="https://kit.fontawesome.com/42d5adcbca.js"
+  crossorigin="anonymous"
+></script>
+<!-- Material Icons -->
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+  rel="stylesheet"
+/>
+<!-- CSS Files -->
+<link
+  id="pagestyle"
+  href="css/material-dashboard.css?v=3.0.0"
+  rel="stylesheet"
+/>
+
+<div id="add-product" v-cloak>
+  <div class="container">
+    <div class="card col-xl-4 mt-4 shadow-dark p-3">
+      <h3>Add New Product</h3>
+      <p>Add New Product to Store</p>
+      <ajax-form
+        action="addProduct"
+        :form-data="formData"
+        @submitted="addProduct()"
+        :form-errors.sync="formErrors"
+        :syncing.sync="syncing"
+        :cloud-error.sync="cloudError"
+      >
+        <div class="input-group input-group-outline my-2">
+          <label for="productName" class="form-label">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            v-model-trim="formData.productName"
+            required
+            aria-required
+          />
+        </div>
+        <div class="input-group input-group-outline my-2">
+          <label for="productDescription" class="form-label">Product Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productDescription"
+            v-model-trim="formData.productDescription"
+            required
+            aria-required
+          />
+        </div>
+        <div class="input-group input-group-outline my-2">
+          <label for="productNote" class="form-label">Product Note</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productNote"
+            v-model-trim="formData.productNote"
+            required
+            aria-required
+          />
+        </div>
+        <div class="input-group input-group-outline my-2">
+          <label for="price" class="form-label">$ Price</label>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            v-model-trim="formData.price"
+            required
+            aria-required
+          />
+        </div>
+        <div v-if="formErrors.addProduct">Make sure the form is filled.</div>
+        <cloud-error v-if="cloudError==='failed'">
+          <p class="text-primary">Failed to Add Product</p>
+        </cloud-error>
+        <div v-if="cloudSuccess">
+          <p class="text-success">
+            Successfully added Product to Store
+          </p>
+        </div>
+        <ajax-button class="btn btn-primary my-2" type="submit">Add Product </ajax-button>
+      </ajax-form>
+    </div>
+  </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */
+exposeLocalsToBrowser() %>

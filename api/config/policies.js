@@ -26,4 +26,5 @@ module.exports.policies = {
   'license/check-if-key-is-valid':true,
   'view-services':true,
   'view-blog':true,
+  'dashboard/add-product':true
 };

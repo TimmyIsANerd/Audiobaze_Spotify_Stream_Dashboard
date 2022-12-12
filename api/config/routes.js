@@ -189,7 +189,18 @@ module.exports.routes = {
   "GET /activate-user/:userId/:NoOfDays": {
     action: "timed-activation",
   },
-  "GET /machine/limit/:id/:limit":{
-    action : "set-machine-limit"
+  "GET /machine/limit/:id/:limit": {
+    action: "set-machine-limit",
+  },
+
+  // Store Management
+  "GET /add-product": {
+    action: "view-add-product",
+    locals: {
+      pageTitle: "Add New Product",
+    },
+  },
+  "POST /add/product":{
+    action: 'dashboard/add-product'
   }
 };
